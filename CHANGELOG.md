@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.0.1](https://github.com/alexfalkowski/status/releases/tag/v1.0.1) - 2023-11-02
+
+- [`95857c2`](https://github.com/alexfalkowski/status/commit/95857c221205d2040baa6f7a62ffb6df19bc7e10) fix: write a response (#3)
+
 ## [v1.0.0](https://github.com/alexfalkowski/status/releases/tag/v1.0.0) - 2023-11-02
 
 - [`26090dd`](https://github.com/alexfalkowski/status/commit/26090dd5b6bc25d5a24e4a5eb0c3c17a08d0a845) feat: add ability to set status code (#2)
