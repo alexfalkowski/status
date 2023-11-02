@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/alexfalkowski/status/cmd"
 	scmd "github.com/alexfalkowski/go-service/cmd"
+	"github.com/alexfalkowski/status/cmd"
 )
 
 func main() {

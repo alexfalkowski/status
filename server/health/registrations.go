@@ -3,8 +3,8 @@ package health
 import (
 	"github.com/alexfalkowski/go-health/checker"
 	"github.com/alexfalkowski/go-health/server"
-	mhealth "github.com/alexfalkowski/status/health"
 	"github.com/alexfalkowski/go-service/health"
+	mhealth "github.com/alexfalkowski/status/health"
 	"go.uber.org/fx"
 )
 

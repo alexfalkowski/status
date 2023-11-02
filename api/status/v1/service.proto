@@ -3,4 +3,4 @@ syntax = "proto3";
 package status.v1;
 
 // Service that does nothing.
-status Service {}
+service Service {}
