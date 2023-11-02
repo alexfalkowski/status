@@ -14,8 +14,10 @@ end
 
 Then('I should receive a response with {int} from HTTP') do |code|
   expect(@response.code).to eq(code)
+  expect(@response.body.length).to be > 0
 end
 
 Then('I should receive a internal error response from HTTP') do
   expect(@response.code).to eq(500)
+  expect(@response.body.length).to be > 0
 end
