@@ -1,9 +1,9 @@
 package config
 
 import (
-	"github.com/alexfalkowski/status/health"
 	"github.com/alexfalkowski/go-service/cmd"
 	"github.com/alexfalkowski/go-service/config"
+	"github.com/alexfalkowski/status/health"
 )
 
 // NewConfigurator for config.
