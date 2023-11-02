@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.0.0](https://github.com/alexfalkowski/status/releases/tag/v1.0.0) - 2023-11-02
+
+- [`26090dd`](https://github.com/alexfalkowski/status/commit/26090dd5b6bc25d5a24e4a5eb0c3c17a08d0a845) feat: add ability to set status code (#2)
+
 ## [v0.1.0](https://github.com/alexfalkowski/status/releases/tag/v0.1.0) - 2023-11-02
 
 - [`4d3b6fe`](https://github.com/alexfalkowski/status/commit/4d3b6fe7b6cdb62d5f9a6f432a2469542ed55976) Merge pull request #1 from alexfalkowski/style/fix
