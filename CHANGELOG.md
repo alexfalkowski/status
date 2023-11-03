@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.3.0](https://github.com/alexfalkowski/status/releases/tag/v1.3.0) - 2023-11-03
+
+- [`1432e45`](https://github.com/alexfalkowski/status/commit/1432e45c669a7dfca819e43503adad952389a2fe) feat: add sleep (#7)
+- [`0e2745e`](https://github.com/alexfalkowski/status/commit/0e2745e416fd8346fdaa1c3869eb1ac43e6b1dc9) test: use grpc port (#6)
+
 ## [v1.2.0](https://github.com/alexfalkowski/status/releases/tag/v1.2.0) - 2023-11-03
 
 - [`faac6b0`](https://github.com/alexfalkowski/status/commit/faac6b0e13d8e0a89f2ab06befaaf0f4e65356e9) feat(deps): update github.com/alexfalkowski/go-service to v1.103.2 (#5)
