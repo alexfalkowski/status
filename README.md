@@ -15,7 +15,33 @@ The service is needed for testing.
 
 ## Server
 
-The server has only one endpoint a HTTP GET to `/v1/status/{code}`, where `code` is a number, e.g 200, 400, etc.
+Below we outline all the endpoints:
+
+### Status Code
+
+Allows to set the status code of the response.
+
+#### Request
+
+```http
+GET /v1/status/{code}
+```
+> [!NOTE]
+> `code` is a number, e.g 200, 400, etc.
+
+| Parameter | Description                                                                  |
+| --------- | ---------------------------------------------------------------------------- |
+| sleep     | The duration to sleep please check out https://pkg.go.dev/time#ParseDuration |
+
+#### Response
+
+The status with a description as text.
+
+Example:
+
+```http
+200 OK
+```
 
 ## Health
 
