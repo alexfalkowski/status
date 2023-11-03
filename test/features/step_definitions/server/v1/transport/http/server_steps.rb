@@ -3,13 +3,13 @@
 When('I request to set the code {int} with HTTP') do |code|
   headers = { request_id: SecureRandom.uuid, user_agent: Status.server_config['transport']['http']['user_agent'] }
 
-  @response = Status::V1.server_http.code(code, headers)
+  @response = Status::V1.server_http.code(code, '1ms', headers)
 end
 
 When('I request to set the invalid code {string} with HTTP') do |code|
   headers = { request_id: SecureRandom.uuid, user_agent: Status.server_config['transport']['http']['user_agent'] }
 
-  @response = Status::V1.server_http.code(code, headers)
+  @response = Status::V1.server_http.code(code, '1ms', headers)
 end
 
 Then('I should receive a response with {int} from HTTP') do |code|
