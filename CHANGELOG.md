@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.3.1](https://github.com/alexfalkowski/status/releases/tag/v1.3.1) - 2023-11-06
+
+- [`dea9ef0`](https://github.com/alexfalkowski/status/commit/dea9ef0773b249b97b3ebd5589575360947f839c) fix(deps): bump github.com/alexfalkowski/go-service (#13)
+- [`cb2d89d`](https://github.com/alexfalkowski/status/commit/cb2d89d570f93af3e1e4ef35ee81914fa757ad77) test(deps): remove solargraph (#12)
+- [`1c058d7`](https://github.com/alexfalkowski/status/commit/1c058d76b7ff4a160850682067ae94d5d52f6f60) ci: use go:1.21-ruby (#11)
+- [`0e04093`](https://github.com/alexfalkowski/status/commit/0e04093222581f947828c970fb6f9dee4d0c3684) build: push to buf (#10)
+- [`d67c507`](https://github.com/alexfalkowski/status/commit/d67c5077feb37955129617d1321fb69a0bbf5b82) build(deps): update bin (#9)
+- [`386d41a`](https://github.com/alexfalkowski/status/commit/386d41ae1cc6915f6b6d6a46bc8417800b36109b) docs: add endpoint section (#8)
+
 ## [v1.3.0](https://github.com/alexfalkowski/status/releases/tag/v1.3.0) - 2023-11-03
 
 - [`1432e45`](https://github.com/alexfalkowski/status/commit/1432e45c669a7dfca819e43503adad952389a2fe) feat: add sleep (#7)
