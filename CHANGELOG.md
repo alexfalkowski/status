@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.3.3](https://github.com/alexfalkowski/status/releases/tag/v1.3.3) - 2023-11-09
+
+- [`22eb726`](https://github.com/alexfalkowski/status/commit/22eb7266e50b97204e275480a30bff81ba89cbca) fix(deps): update github.com/alexfalkowski/go-service to v1.108.3 (#18)
+- [`4c25996`](https://github.com/alexfalkowski/status/commit/4c25996dc7932676b4ef37ee487d1760896d8153) build: update image to debian12 (#17)
+- [`ffdc813`](https://github.com/alexfalkowski/status/commit/ffdc81387f621f783a0136e3178773d853cc22f0) ci: add trivy (#16)
+- [`629ee89`](https://github.com/alexfalkowski/status/commit/629ee89beb9e0d719be8588c04d05bd450c8b735) ci: move to new structure (#15)
+
 ## [v1.3.2](https://github.com/alexfalkowski/status/releases/tag/v1.3.2) - 2023-11-07
 
 - [`5b79def`](https://github.com/alexfalkowski/status/commit/5b79deffbb215e1f2c8891dd21aa494c6dac9b14) fix(deps): bump github.com/alexfalkowski/go-service (#14)
