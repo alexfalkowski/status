@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/alexfalkowski/go-health v1.13.0
-	github.com/alexfalkowski/go-service v1.112.3
+	github.com/alexfalkowski/go-service v1.114.1
 	go.uber.org/fx v1.20.1
 )
 
@@ -45,7 +45,7 @@ require (
 	github.com/jackc/pgtype v1.14.0 // indirect
 	github.com/jackc/pgx/v4 v4.18.1 // indirect
 	github.com/jmoiron/sqlx v1.3.5 // indirect
-	github.com/klauspost/compress v1.17.2 // indirect
+	github.com/klauspost/compress v1.17.3 // indirect
 	github.com/lib/pq v1.10.7 // indirect
 	github.com/linxGnu/mssqlx v1.1.8 // indirect
 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
