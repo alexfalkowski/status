@@ -3,10 +3,8 @@
 module Status
   module V1
     class HTTP < Nonnative::HTTPClient
-      def code(code, sleep, headers = {})
-        headers.merge!(content_type: :json, accept: :json)
-
-        get("v1/status/#{code}?sleep=#{sleep}", headers, 10)
+      def code(code, sleep, opts = {})
+        get("v1/status/#{code}?sleep=#{sleep}", opts)
       end
     end
   end

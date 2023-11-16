@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 When('the system requests the {string} with HTTP') do |name|
-  @response = Status.observability.send(name)
+  opts = {
+    headers: { request_id: SecureRandom.uuid, content_type: :json, accept: :json },
+    read_timeout: 10, open_timeout: 10
+  }
+
+  @response = Status.observability.send(name, opts)
 end
 
 Then('the system should respond with a healthy status with HTTP') do
