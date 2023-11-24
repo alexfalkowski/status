@@ -14,10 +14,9 @@ func main() {
 }
 
 func command() *scmd.Command {
-	command := scmd.New()
+	command := scmd.New(cmd.Version)
 
-	command.AddServer(cmd.ServerOptions)
-	command.AddVersion(cmd.Version)
+	command.AddServer(cmd.ServerOptions...)
 
 	return command
 }
