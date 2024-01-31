@@ -3,6 +3,7 @@ package http
 import (
 	"fmt"
 	"net/http"
+	"net/http/httputil"
 	"strconv"
 	"time"
 
@@ -24,7 +25,13 @@ func Register(server *shttp.Server) error {
 			c = http.StatusInternalServerError
 		}
 
+		req, err := httputil.DumpRequest(r, true)
+		if err != nil {
+			c = http.StatusInternalServerError
+		}
+
 		w.WriteHeader(c)
+		w.Write(req)                                                 //nolint:errcheck
 		w.Write([]byte(fmt.Sprintf("%d %s", c, http.StatusText(c)))) //nolint:errcheck
 	})
 }

@@ -114,6 +114,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
+    prism (0.19.0)
     puma (6.4.2)
       nio4r (~> 2.0)
     racc (1.7.3)
@@ -164,6 +165,10 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.30.0)
       parser (>= 3.2.1.0)
+    ruby-lsp (0.13.4)
+      language_server-protocol (~> 3.17.0)
+      prism (>= 0.19.0, < 0.20)
+      sorbet-runtime (>= 0.5.10782)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     sinatra (4.0.0)
@@ -172,6 +177,7 @@ GEM
       rack-protection (= 4.0.0)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
+    sorbet-runtime (0.5.11222)
     sys-uname (1.2.3)
       ffi (~> 1.1)
     tilt (2.3.0)
@@ -188,6 +194,7 @@ DEPENDENCIES
   rspec-expectations
   rspec-wait
   rubocop
+  ruby-lsp
 
 BUNDLED WITH
    2.4.10
