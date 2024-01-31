@@ -35,6 +35,8 @@ GET /v1/status/{code}
 
 #### Response
 
+The request response as defined at [DumpRequest](https://pkg.go.dev/net/http/httputil#DumpRequest).
+
 The status with a description as text.
 
 Example:
