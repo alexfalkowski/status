@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.12.1](https://github.com/alexfalkowski/status/releases/tag/v1.12.1) - 2024-02-05
+
+- [`56d2ad0`](https://github.com/alexfalkowski/status/commit/56d2ad0702bd7f50ef0cfb85e7a9770e88317b44) fix(deps): bump github.com/alexfalkowski/go-service from 1.124.12 to 1.124.14 (#77)
+- [`4a26508`](https://github.com/alexfalkowski/status/commit/4a26508a086376a84c35d47d7725f70ebd042579) build(deps): bump rspec-expectations from 3.12.3 to 3.13.0 in /test (#76)
+- [`bcc800c`](https://github.com/alexfalkowski/status/commit/bcc800c53ef4361f0aeb6790eb44dd4349b5344b) docs(http): add dump request (#74)
+
 ## [v1.12.0](https://github.com/alexfalkowski/status/releases/tag/v1.12.0) - 2024-01-31
 
 - [`3e858a7`](https://github.com/alexfalkowski/status/commit/3e858a726e669935d208c55b95d2305a410f0d43) feat(http): use httputil to dump request (#73)
