@@ -1,10 +1,10 @@
 module github.com/alexfalkowski/status
 
-go 1.21
+go 1.22
 
 require (
 	github.com/alexfalkowski/go-health v1.13.2
-	github.com/alexfalkowski/go-service v1.125.3
+	github.com/alexfalkowski/go-service v1.126.0
 	go.uber.org/fx v1.20.1
 )
 

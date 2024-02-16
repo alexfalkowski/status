@@ -12,8 +12,8 @@ github.com/DATA-DOG/go-sqlmock v1.5.2 h1:OcvFkGmslmlZibjAjaHm3L//6LiuBgolP7Oputl
 github.com/DATA-DOG/go-sqlmock v1.5.2/go.mod h1:88MAG/4G7SMwSE3CeA0ZKzrT5CiOU3OJ+JlNzwDqpNU=
 github.com/alexfalkowski/go-health v1.13.2 h1:AEJz5roMtIarPK6YgL9BNQ2TftRqtgbqV7GgVAvA93o=
 github.com/alexfalkowski/go-health v1.13.2/go.mod h1:lrkap6VIgLB/Zua/bHc22+6aejg+uSXJyVAD2veF2yg=
-github.com/alexfalkowski/go-service v1.125.3 h1:hSiWNoezcyYO5TtyPKKYEqMvatQ1VoS4Uh7HhKmf55U=
-github.com/alexfalkowski/go-service v1.125.3/go.mod h1:p2SJvp3TtRw7BMSdXLRy+b+eG0jxTiucrMp8iv8krws=
+github.com/alexfalkowski/go-service v1.126.0 h1:NJyAjS0gusDkdeAPlDnUEXRD+0jAfAPKPikV4F5Peww=
+github.com/alexfalkowski/go-service v1.126.0/go.mod h1:Pt855xWNN+iKObay3PVwgFnutUFmyjqhSYzC3J0gBEg=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/arl/statsviz v0.6.0 h1:jbW1QJkEYQkufd//4NDYRSNBpwJNrdzPahF7ZmoGdyE=
 github.com/arl/statsviz v0.6.0/go.mod h1:0toboo+YGSUXDaS4g1D5TVS4dXs7S7YYT5J/qnW2h8s=
