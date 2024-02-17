@@ -14,8 +14,16 @@ Feature: Server
 
   Scenario Outline: Set invalid status code
     When I request to set the invalid code "<code>" with HTTP
-    Then I should receive a internal error response from HTTP
+    Then I should receive a bad request response from HTTP
 
     Examples:
       | code    |
+      | invalid |
+
+  Scenario Outline: Set invalid sleep
+    When I request to set the code "200" and invalid "<sleep>" for HTTP
+    Then I should receive a bad request response from HTTP
+
+    Examples:
+      | sleep   |
       | invalid |

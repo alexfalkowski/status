@@ -39,12 +39,6 @@ The request response as defined at [DumpRequest](https://pkg.go.dev/net/http/htt
 
 The status with a description as text.
 
-Example:
-
-```http
-200 OK
-```
-
 ## Health
 
 The system defines a way to monitor all of it's dependencies.
