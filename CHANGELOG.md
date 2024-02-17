@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.13.5](https://github.com/alexfalkowski/status/releases/tag/v1.13.5) - 2024-02-17
+
+- [`2c1ff7a`](https://github.com/alexfalkowski/status/commit/2c1ff7ae1363199414beff2b8fe01a14ce8b6576) fix(http): handle error (#89)
+
 ## [v1.13.4](https://github.com/alexfalkowski/status/releases/tag/v1.13.4) - 2024-02-17
 
 - [`6e63ddd`](https://github.com/alexfalkowski/status/commit/6e63dddc177040a02b87f6d1158da9d628dc1904) fix: toolchain (#88)
