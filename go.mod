@@ -1,6 +1,6 @@
 module github.com/alexfalkowski/status
 
-go 1.22
+go 1.22.0
 
 require (
 	github.com/alexfalkowski/go-health v1.13.2
