@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.13.6](https://github.com/alexfalkowski/status/releases/tag/v1.13.6) - 2024-02-18
+
+- [`1f65011`](https://github.com/alexfalkowski/status/commit/1f650112b1aed22876024024400a3189a1937e5f) fix(http): follow https://httpstat.us/ (#90)
+
 ## [v1.13.5](https://github.com/alexfalkowski/status/releases/tag/v1.13.5) - 2024-02-17
 
 - [`2c1ff7a`](https://github.com/alexfalkowski/status/commit/2c1ff7ae1363199414beff2b8fe01a14ce8b6576) fix(http): handle error (#89)
