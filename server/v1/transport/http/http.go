@@ -1,8 +1,8 @@
 package http
 
 import (
+	"fmt"
 	"net/http"
-	"net/http/httputil"
 	"strconv"
 	"time"
 
@@ -32,20 +32,9 @@ func Register(server *shttp.Server) error {
 			return
 		}
 
-		req, err := httputil.DumpRequest(r, true)
-		if err != nil {
-			writeInternalError(w, err)
-
-			return
-		}
-
 		w.WriteHeader(c)
-		w.Write(req) //nolint:errcheck
+		w.Write([]byte(fmt.Sprintf("%d %s", c, http.StatusText(c)))) //nolint:errcheck
 	})
-}
-
-func writeInternalError(w http.ResponseWriter, err error) {
-	writeError(w, http.StatusInternalServerError, err)
 }
 
 func writeBadRequest(w http.ResponseWriter, err error) {
