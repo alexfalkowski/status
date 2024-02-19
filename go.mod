@@ -3,8 +3,8 @@ module github.com/alexfalkowski/status
 go 1.22.0
 
 require (
-	github.com/alexfalkowski/go-health v1.13.2
-	github.com/alexfalkowski/go-service v1.126.0
+	github.com/alexfalkowski/go-health v1.14.1
+	github.com/alexfalkowski/go-service v1.126.3
 	go.uber.org/fx v1.20.1
 )
 
@@ -70,7 +70,7 @@ require (
 	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/tklauser/numcpus v0.6.1 // indirect
-	github.com/urfave/negroni/v3 v3.0.0 // indirect
+	github.com/urfave/negroni/v3 v3.1.0 // indirect
 	github.com/vmihailenco/go-tinylfu v0.2.2 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
