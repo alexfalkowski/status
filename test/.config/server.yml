@@ -6,8 +6,10 @@ health:
   timeout: 1s
 telemetry:
   logger:
+    enabled: true
     level: info
   tracer:
+    enabled: true
     host: localhost:4318
     secure: false
 transport:
