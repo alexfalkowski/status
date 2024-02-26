@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.14.1](https://github.com/alexfalkowski/status/releases/tag/v1.14.1) - 2024-02-26
+
+- [`e084ab8`](https://github.com/alexfalkowski/status/commit/e084ab8742a2451f25622c9915de3554667837a6) fix(deps): bump github.com/alexfalkowski/go-service from 1.128.0 to 1.128.1 (#99)
+- [`c815bb8`](https://github.com/alexfalkowski/status/commit/c815bb87ac9a47dcf28d6f3dba279603595b27e4) build(deps): bump ruby-lsp from 0.14.2 to 0.14.3 in /test (#100)
+
 ## [v1.14.0](https://github.com/alexfalkowski/status/releases/tag/v1.14.0) - 2024-02-25
 
 - [`650f418`](https://github.com/alexfalkowski/status/commit/650f41818aece5ed011e0a2c37c3847f6fede088) feat(deps): update github.com/alexfalkowski/go-service to v1.128.0 (#98)
