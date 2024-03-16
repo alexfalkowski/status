@@ -55,12 +55,6 @@ health:
   timeout: 1s (when we should timeout the check)
 ```
 
-```toml
-[health]
-duration = "1s (how often to check)"
-timeout = "1s (when we should timeout the check)"
-```
-
 ## Deployment
 
 Since we are advocating building microservices, you would normally use a [container orchestration system](https://newrelic.com/blog/best-practices/container-orchestration-explained).
