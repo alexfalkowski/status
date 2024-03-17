@@ -14,5 +14,5 @@ func NewConfigurator(i *cmd.InputConfig) (config.Configurator, error) {
 }
 
 func healthConfig(cfg config.Configurator) *health.Config {
-	return &cfg.(*Config).Health
+	return cfg.(*Config).Health
 }
