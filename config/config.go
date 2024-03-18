@@ -7,6 +7,6 @@ import (
 
 // Config for the service.
 type Config struct {
-	Health        *health.Config `yaml:"health,omitempty" json:"health,omitempty" toml:"health,omitempty"`
-	config.Config `yaml:",inline" json:",inline" toml:",inline"`
+	Health         *health.Config `yaml:"health,omitempty" json:"health,omitempty" toml:"health,omitempty"`
+	*config.Config `yaml:",inline" json:",inline" toml:",inline"`
 }
