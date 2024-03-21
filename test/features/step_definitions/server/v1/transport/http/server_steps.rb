@@ -3,7 +3,7 @@
 When('I request to set the code {int} with HTTP') do |code|
   opts = {
     headers: {
-      request_id: SecureRandom.uuid, user_agent: Status.server_config.transport.http.user_agent,
+      request_id: SecureRandom.uuid, user_agent: 'Status-ruby-client/1.0 HTTP/1.0',
       content_type: :json, accept: :json
     },
     read_timeout: 10, open_timeout: 10
@@ -15,7 +15,7 @@ end
 When('I request to set the invalid code {string} with HTTP') do |code|
   opts = {
     headers: {
-      request_id: SecureRandom.uuid, user_agent: Status.server_config.transport.http.user_agent,
+      request_id: SecureRandom.uuid, user_agent: 'Status-ruby-client/1.0 HTTP/1.0',
       content_type: :json, accept: :json
     },
     read_timeout: 10, open_timeout: 10
@@ -27,7 +27,7 @@ end
 When('I request to set the code {string} and invalid {string} for HTTP') do |code, sleep|
   opts = {
     headers: {
-      request_id: SecureRandom.uuid, user_agent: Status.server_config.transport.http.user_agent,
+      request_id: SecureRandom.uuid, user_agent: 'Status-ruby-client/1.0 HTTP/1.0',
       content_type: :json, accept: :json
     },
     read_timeout: 10, open_timeout: 10
