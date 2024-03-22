@@ -8,7 +8,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . ./
-RUN go build -ldflags="-X 'github.com/alexfalkowski/status/cmd.Version=${version}'" -a -o status main.go
+RUN go build -ldflags="-s -w -X 'github.com/alexfalkowski/status/cmd.Version=${version}'" -a -o status main.go
 
 FROM gcr.io/distroless/base-debian12
 
