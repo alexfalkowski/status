@@ -15,14 +15,14 @@ telemetry:
 transport:
   http:
     enabled: true
-    port: 8080
+    port: 11000
     user_agent: "Status-server/1.0 HTTP/1.0"
     retry:
       timeout: 2s
       attempts: 3
   grpc:
     enabled: true
-    port: 9090
+    port: 12000
     user_agent: "Status-server/1.0 gRPC/1.0"
     retry:
       timeout: 2s
