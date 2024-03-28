@@ -7,8 +7,8 @@ github.com/DATA-DOG/go-sqlmock v1.5.2 h1:OcvFkGmslmlZibjAjaHm3L//6LiuBgolP7Oputl
 github.com/DATA-DOG/go-sqlmock v1.5.2/go.mod h1:88MAG/4G7SMwSE3CeA0ZKzrT5CiOU3OJ+JlNzwDqpNU=
 github.com/KimMachineGun/automemlimit v0.5.0 h1:BeOe+BbJc8L5chL3OwzVYjVzyvPALdd5wxVVOWuUZmQ=
 github.com/KimMachineGun/automemlimit v0.5.0/go.mod h1:di3GCKiu9Y+1fs92erCbUvKzPkNyViN3mA0vti/ykEQ=
-github.com/alexfalkowski/go-health v1.15.0 h1:n762ffF7Ulg+lWDw/PLvWvzTj3H4I8dFet+kmI3HNFk=
-github.com/alexfalkowski/go-health v1.15.0/go.mod h1:GrfpkU3sTiZkGsm1thyZ3WiBFL6/vX29cskAKMw3h48=
+github.com/alexfalkowski/go-health v1.16.0 h1:oOr6wXEAtglRGYpZaJSk19qGlmYw5vzQzFWGcVPzx8I=
+github.com/alexfalkowski/go-health v1.16.0/go.mod h1:GrfpkU3sTiZkGsm1thyZ3WiBFL6/vX29cskAKMw3h48=
 github.com/alexfalkowski/go-service v1.149.1 h1:jduoRUFgJnCM9ctpy33T+Y2u3ZnoxhCYUAc90Z/ua7I=
 github.com/alexfalkowski/go-service v1.149.1/go.mod h1:T2SrziEcgJ+0Hp9Ex8vwYewSDUNe1MWj2rxyJNR4j/I=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
