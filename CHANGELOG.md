@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.24.1](https://github.com/alexfalkowski/status/releases/tag/v1.24.1) - 2024-03-28
+
+- [`f203fd9`](https://github.com/alexfalkowski/status/commit/f203fd9f2d20cc0d224e34b3341f4f73cd6f9f45) fix(deps): update github.com/alexfalkowski/go-service to v1.149.1 (#139)
+- [`d76ce88`](https://github.com/alexfalkowski/status/commit/d76ce88ef8f7111db9d437cb4ff6f4f565f470ae) build(deps): bump bin from `60071ae` to `a19d7ca` (#138)
+- [`f7dbf69`](https://github.com/alexfalkowski/status/commit/f7dbf69efa5c946af4c725ef83b3dd6d7d2f7ba9) build(deps): bump bin from `06726b5` to `60071ae` (#137)
+- [`921fcdd`](https://github.com/alexfalkowski/status/commit/921fcdd196fb7110710d574fe981584d9bc4f48e) build(dependabot): change prefixes (#136)
+- [`015e5b5`](https://github.com/alexfalkowski/status/commit/015e5b55158f470c48c90866c504c74370884804) build(make): add git commands (#135)
+
 ## [v1.24.0](https://github.com/alexfalkowski/status/releases/tag/v1.24.0) - 2024-03-22
 
 - [`51ccc89`](https://github.com/alexfalkowski/status/commit/51ccc89ca396e2fba1e06b8f4158e3fbb15b47ce) feat: add ldflags to minimise binary size (#132)
