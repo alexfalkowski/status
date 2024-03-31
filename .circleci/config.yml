@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run: git submodule sync
       - run: git submodule update --init
-      - run: make setup
+      - run: make dep
       - run: make lint
       - run: make sec
       - run: make features
