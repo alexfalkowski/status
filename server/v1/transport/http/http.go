@@ -11,7 +11,7 @@ import (
 
 // Register for http.
 func Register(server *shttp.Server) error {
-	return server.Mux.HandlePath("GET", "/v1/status/{code}", func(w http.ResponseWriter, r *http.Request, p map[string]string) {
+	return server.ServeMux().HandlePath("GET", "/v1/status/{code}", func(w http.ResponseWriter, r *http.Request, p map[string]string) {
 		s := r.URL.Query().Get("sleep")
 
 		if s != "" {
