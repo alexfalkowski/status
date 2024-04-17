@@ -13,10 +13,12 @@ jobs:
           name: restore go deps
           keys:
             - status-go-cache-{{ checksum "go.sum" }}
+            - status-go-cache-
       - restore_cache:
           name: restore ruby deps
           keys:
             - status-ruby-cache-{{ checksum "test/Gemfile.lock" }}
+            - status-ruby-cache-
       - run: make dep
       - save_cache:
           name: save go deps
@@ -32,6 +34,7 @@ jobs:
           name: restore go build cache
           keys:
             - status-go-build-cache-{{ checksum "go.sum" }}
+            - status-go-build-cache-
       - run: make lint
       - run: make sec
       - run: make features
