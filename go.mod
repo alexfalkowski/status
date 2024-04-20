@@ -4,7 +4,8 @@ go 1.22.2
 
 require (
 	github.com/alexfalkowski/go-health v1.16.1
-	github.com/alexfalkowski/go-service v1.154.6
+	github.com/alexfalkowski/go-service v1.155.0
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
 	go.uber.org/fx v1.21.0
 )
 
@@ -40,7 +41,6 @@ require (
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0 // indirect
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect

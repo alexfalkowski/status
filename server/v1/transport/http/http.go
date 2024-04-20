@@ -6,12 +6,12 @@ import (
 	"strconv"
 	"time"
 
-	shttp "github.com/alexfalkowski/go-service/transport/http"
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 )
 
 // Register for http.
-func Register(server *shttp.Server) error {
-	return server.ServeMux().HandlePath("GET", "/v1/status/{code}", func(w http.ResponseWriter, r *http.Request, p map[string]string) {
+func Register(mux *runtime.ServeMux) error {
+	return mux.HandlePath("GET", "/v1/status/{code}", func(w http.ResponseWriter, r *http.Request, p map[string]string) {
 		s := r.URL.Query().Get("sleep")
 
 		if s != "" {
