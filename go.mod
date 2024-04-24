@@ -6,7 +6,7 @@ require (
 	github.com/alexfalkowski/go-health v1.16.1
 	github.com/alexfalkowski/go-service v1.164.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
-	go.uber.org/fx v1.21.0
+	go.uber.org/fx v1.21.1
 )
 
 require (
