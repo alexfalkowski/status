@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/alexfalkowski/go-health v1.16.1
-	github.com/alexfalkowski/go-service v1.165.3
+	github.com/alexfalkowski/go-service v1.166.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
 	go.uber.org/fx v1.21.1
 )
@@ -57,7 +57,6 @@ require (
 	github.com/lib/pq v1.10.9 // indirect
 	github.com/linxGnu/mssqlx v1.1.8 // indirect
 	github.com/lufia/plan9stats v0.0.0-20231016141302-07b5767bb0ed // indirect
-	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/ngrok/sqlmw v0.0.0-20220520173518-97c9c04efc79 // indirect
 	github.com/open-feature/go-sdk v1.11.0 // indirect
 	github.com/open-feature/go-sdk-contrib/providers/flipt v0.1.1 // indirect
@@ -70,7 +69,7 @@ require (
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.48.0 // indirect
 	github.com/prometheus/procfs v0.12.0 // indirect
-	github.com/rs/cors v1.10.1 // indirect
+	github.com/rs/cors v1.11.0 // indirect
 	github.com/shirou/gopsutil/v3 v3.24.3 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
@@ -82,6 +81,7 @@ require (
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.13 // indirect
 	github.com/tklauser/numcpus v0.7.0 // indirect
+	github.com/ulule/limiter/v3 v3.11.2 // indirect
 	github.com/urfave/negroni/v3 v3.1.0 // indirect
 	github.com/vmihailenco/go-tinylfu v0.2.2 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
