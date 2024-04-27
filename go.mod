@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/alexfalkowski/go-health v1.16.1
-	github.com/alexfalkowski/go-service v1.171.0
+	github.com/alexfalkowski/go-service v1.172.0
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
 	go.uber.org/fx v1.21.1
 )
@@ -27,6 +27,7 @@ require (
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/felixge/fgprof v0.9.4 // indirect
+	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
