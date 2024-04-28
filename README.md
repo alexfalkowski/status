@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/alexfalkowski/status.svg?style=svg)](https://circleci.com/gh/alexfalkowski/status)
-[![Coverage Status](https://coveralls.io/repos/github/alexfalkowski/status/badge.svg?branch=master)](https://coveralls.io/github/alexfalkowski/status?branch=master)
 
 # Status
 
