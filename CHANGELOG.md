@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.37.2](https://github.com/alexfalkowski/status/releases/tag/v1.37.2) - 2024-04-30
+
+- [`bf57147`](https://github.com/alexfalkowski/status/commit/bf571475c0657f8f2290032160d84e8f38f9ed79) fix(deps): upgraded github.com/alexfalkowski/go-service to v1.172.4 (#211)
+- [`087eb74`](https://github.com/alexfalkowski/status/commit/087eb74bb7263a5990f4dbfb4f755ea635a28c63) test(deps): bump rubocop from 1.63.3 to 1.63.4 in /test (#210)
+- [`62f3b4a`](https://github.com/alexfalkowski/status/commit/62f3b4a1402f60dcd473f56bcc10611d35f3ee8c) build(ci): cover all (#209)
+- [`c1531f9`](https://github.com/alexfalkowski/status/commit/c1531f9dfba4bb75bdc143a433c9608003ce1db6) build(deps): bump bin from `3976e45` to `e47704b` (#208)
+- [`2dd681b`](https://github.com/alexfalkowski/status/commit/2dd681bc297bf605e8c716babc13164499c15fca) build(ci): html coverage (#207)
+- [`7bd819f`](https://github.com/alexfalkowski/status/commit/7bd819fb497e610c050eb7e0313af0fc88f86883) build(deps): bump bin from `1755d45` to `3976e45` (#206)
+- [`85fd014`](https://github.com/alexfalkowski/status/commit/85fd0145dbe52b1eaed3f0c00406544793fd79b1) build(deps): bump bin from `6fee1b8` to `1755d45` (#205)
+- [`454f52d`](https://github.com/alexfalkowski/status/commit/454f52d6c9a4f445cc8879e6569ac11981b4b225) build(coveralls): remove goveralls (#204)
+
 ## [v1.37.1](https://github.com/alexfalkowski/status/releases/tag/v1.37.1) - 2024-04-27
 
 - [`7e364ed`](https://github.com/alexfalkowski/status/commit/7e364ed6215eb2adb47fb8895da67ade4228c70f) fix(deps): bump github.com/alexfalkowski/go-service from 1.172.0 to 1.172.1 (#203)
