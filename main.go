@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	scmd "github.com/alexfalkowski/go-service/cmd"
+	sc "github.com/alexfalkowski/go-service/cmd"
 	"github.com/alexfalkowski/status/cmd"
 )
 
@@ -13,10 +13,10 @@ func main() {
 	}
 }
 
-func command() *scmd.Command {
-	command := scmd.New(cmd.Version)
+func command() *sc.Command {
+	c := sc.New(cmd.Version)
+	c.RegisterInput("env:CONFIG_FILE")
+	c.AddServer(cmd.ServerOptions...)
 
-	command.AddServer(cmd.ServerOptions...)
-
-	return command
+	return c
 }
