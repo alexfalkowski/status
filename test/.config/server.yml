@@ -15,16 +15,9 @@ telemetry:
     host: http://localhost:4318/v1/traces
 transport:
   http:
+    mux: standard
     port: 11000
     user_agent: "Status-server/1.0 HTTP/1.0"
-    retry:
-      attempts: 3
-      backoff: 100ms
-      timeout: 10s
-    timeout: 5s
-  grpc:
-    port: 12000
-    user_agent: "Status-server/1.0 gRPC/1.0"
     retry:
       attempts: 3
       backoff: 100ms

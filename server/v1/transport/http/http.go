@@ -6,13 +6,14 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	sh "github.com/alexfalkowski/go-service/net/http"
 )
 
 // Register for http.
-func Register(mux *runtime.ServeMux) error {
-	return mux.HandlePath("GET", "/v1/status/{code}", func(w http.ResponseWriter, r *http.Request, p map[string]string) {
-		s := r.URL.Query().Get("sleep")
+func Register(mux sh.ServeMux) error {
+	return mux.Handle("GET", "/v1/status/{code}", func(w http.ResponseWriter, r *http.Request) {
+		query := r.URL.Query()
+		s := query.Get("sleep")
 
 		if s != "" {
 			t, err := time.ParseDuration(s)
@@ -25,7 +26,7 @@ func Register(mux *runtime.ServeMux) error {
 			time.Sleep(t)
 		}
 
-		c, err := strconv.Atoi(p["code"])
+		c, err := strconv.Atoi(r.PathValue("code"))
 		if err != nil {
 			writeBadRequest(w, err)
 
