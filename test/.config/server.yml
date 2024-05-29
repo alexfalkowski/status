@@ -17,7 +17,6 @@ transport:
   http:
     mux: standard
     port: 11000
-    user_agent: "Status-server/1.0 HTTP/1.0"
     retry:
       attempts: 3
       backoff: 100ms
