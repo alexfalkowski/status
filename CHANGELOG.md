@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.62.0](https://github.com/alexfalkowski/status/releases/tag/v1.62.0) - 2024-06-09
+
+- [`f639b66`](https://github.com/alexfalkowski/status/commit/f639b66f64623d34a54071dd4cc13fbd045cfcaa) feat(deps): upgraded github.com/alexfalkowski/go-service to v1.214.1 (#274)
+- [`3b4e460`](https://github.com/alexfalkowski/status/commit/3b4e460b76454d8f1b27141cc9a3d34635cbf8c4) build(deps): bump bin from `955891d` to `897d5f1` (#273)
+- [`731a1c8`](https://github.com/alexfalkowski/status/commit/731a1c833f574a9ac31d534570f68458dd9df8b0) build(ci): fix bundler dependabot (#272)
+- [`7c95e1f`](https://github.com/alexfalkowski/status/commit/7c95e1fe9e0fa68e36ec27458ac9aafef43b71d3) build(ci): add dependabot (#271)
+- [`028efac`](https://github.com/alexfalkowski/status/commit/028efac0d23ddca82bee94dcb15787f12e54515e) build(ci): use alexfalkowski/go:1.22 (#270)
+- [`dcb3453`](https://github.com/alexfalkowski/status/commit/dcb3453233d55e485ac33fbb52179333857f855c) build(ci): use alexfalkowski/go:1.22 (#269)
+
 ## [v1.61.2](https://github.com/alexfalkowski/status/releases/tag/v1.61.2) - 2024-06-05
 
 - [`cd17873`](https://github.com/alexfalkowski/status/commit/cd17873be9b48f459be0ce0bd50972b3fedb7da2) fix(deps): upgraded github.com/alexfalkowski/go-service to v1.213.3 (#268)
