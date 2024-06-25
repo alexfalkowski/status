@@ -15,7 +15,6 @@ telemetry:
     host: http://localhost:4318/v1/traces
 transport:
   http:
-    mux: standard
     port: 11000
     retry:
       attempts: 3
