@@ -5,13 +5,11 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-
-	sh "github.com/alexfalkowski/go-service/net/http"
 )
 
 // Register for http.
-func Register(mux sh.ServeMux) error {
-	return mux.Handle("GET", "/v1/status/{code}", func(w http.ResponseWriter, r *http.Request) {
+func Register(mux *http.ServeMux) {
+	mux.HandleFunc("GET /v1/status/{code}", func(w http.ResponseWriter, r *http.Request) {
 		query := r.URL.Query()
 		s := query.Get("sleep")
 
