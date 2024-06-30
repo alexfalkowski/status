@@ -1,5 +1,8 @@
 [![CircleCI](https://circleci.com/gh/alexfalkowski/status.svg?style=svg)](https://circleci.com/gh/alexfalkowski/status)
 [![codecov](https://codecov.io/gh/alexfalkowski/status/graph/badge.svg?token=G6T3OIWUFK)](https://codecov.io/gh/alexfalkowski/status)
+[![Go Report Card](https://goreportcard.com/badge/github.com/alexfalkowski/status)](https://goreportcard.com/report/github.com/alexfalkowski/status)
+[![Go Reference](https://pkg.go.dev/badge/github.com/alexfalkowski/status.svg)](https://pkg.go.dev/github.com/alexfalkowski/status)
+[![Stability: Active](https://masterminds.github.io/stability/active.svg)](https://masterminds.github.io/stability/active.html)
 
 # Status
 
