@@ -4,7 +4,7 @@ go 1.22.5
 
 require (
 	github.com/alexfalkowski/go-health v1.17.2
-	github.com/alexfalkowski/go-service v1.251.0
+	github.com/alexfalkowski/go-service v1.253.0
 	go.uber.org/fx v1.22.1
 )
 
@@ -79,7 +79,7 @@ require (
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.55.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
-	github.com/redis/go-redis/v9 v9.6.0 // indirect
+	github.com/redis/go-redis/v9 v9.6.1 // indirect
 	github.com/rs/cors v1.11.0 // indirect
 	github.com/secure-io/siv-go v0.0.0-20180922214919-5ff40651e2c4 // indirect
 	github.com/sethvargo/go-limiter v1.0.0 // indirect
