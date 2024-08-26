@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.110.0](https://github.com/alexfalkowski/status/releases/tag/v1.110.0) - 2024-08-26
+
+- [`661ea85`](https://github.com/alexfalkowski/status/commit/661ea85ae7da975e3c50008fb6e432c356c4dfa7) feat(deps): upgraded github.com/alexfalkowski/go-service to v1.280.0 (#370)
+- [`7dc0c52`](https://github.com/alexfalkowski/status/commit/7dc0c522c279c0ad990da0a9a97b184de93c62e4) build(ci): use make codecov-upload (#369)
+- [`0cdebaf`](https://github.com/alexfalkowski/status/commit/0cdebafec6f80718a988e28b1c37dc59076f15c4) test(deps): bump rexml from 3.3.5 to 3.3.6 in /test (#368)
+
 ## [v1.109.0](https://github.com/alexfalkowski/status/releases/tag/v1.109.0) - 2024-08-21
 
 - [`22a8b10`](https://github.com/alexfalkowski/status/commit/22a8b1091bfcb9cb9555cd32f8b485cd13209632) feat(deps): bump github.com/alexfalkowski/go-service from 1.278.0 to 1.279.0 (#367)
