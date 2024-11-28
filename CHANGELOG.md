@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.147.0](https://github.com/alexfalkowski/status/releases/tag/v1.147.0) - 2024-11-28
+
+- [`bb719c3`](https://github.com/alexfalkowski/status/commit/bb719c321960659f91b8f16dd63fd70d0a65a1e8) feat(deps): upgraded github.com/alexfalkowski/go-service to v1.316.0 (#450)
+- [`a58e925`](https://github.com/alexfalkowski/status/commit/a58e925212f54233d0d1e08c4aed29047b561a18) test(deps): bump rubocop from 1.68.0 to 1.69.0 in /test (#449)
+- [`57ee9df`](https://github.com/alexfalkowski/status/commit/57ee9df6d9f5f8fba786e43c69d20642daa3fd75) test(deps): bump ruby-lsp from 0.22.0 to 0.22.1 in /test (#448)
+- [`8a81c91`](https://github.com/alexfalkowski/status/commit/8a81c910982c042cd2be9c4f494277be4a10de60) test(deps): bump ruby-lsp from 0.21.3 to 0.22.0 in /test (#447)
+
 ## [v1.146.0](https://github.com/alexfalkowski/status/releases/tag/v1.146.0) - 2024-11-20
 
 - [`e9e4d65`](https://github.com/alexfalkowski/status/commit/e9e4d659f94f859220b01f7583c71580238690e6) feat(deps): bump github.com/alexfalkowski/go-service from 1.314.0 to 1.315.0 (#446)
