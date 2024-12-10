@@ -7,7 +7,7 @@ import (
 
 // Module for fx.
 var Module = fx.Options(
-	fx.Provide(NewConfig),
+	fx.Provide(config.NewConfig[Config]),
 	config.Module,
 	fx.Decorate(decorateConfig),
 	fx.Provide(healthConfig),
