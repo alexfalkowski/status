@@ -9,7 +9,7 @@ When('I request to set the code {int} with HTTP') do |code|
     read_timeout: 10, open_timeout: 10
   }
 
-  @response = Status::V1.server_http.code(code, '1ms', opts)
+  @response = Status::V1.http.code(code, '1ms', opts)
 end
 
 When('I request to set the invalid code {string} with HTTP') do |code|
@@ -21,7 +21,7 @@ When('I request to set the invalid code {string} with HTTP') do |code|
     read_timeout: 10, open_timeout: 10
   }
 
-  @response = Status::V1.server_http.code(code, '1ms', opts)
+  @response = Status::V1.http.code(code, '1ms', opts)
 end
 
 When('I request to set the code {string} and invalid {string} for HTTP') do |code, sleep|
@@ -33,7 +33,7 @@ When('I request to set the code {string} and invalid {string} for HTTP') do |cod
     read_timeout: 10, open_timeout: 10
   }
 
-  @response = Status::V1.server_http.code(code, sleep, opts)
+  @response = Status::V1.http.code(code, sleep, opts)
 end
 
 Then('I should receive a bad request response from HTTP') do
