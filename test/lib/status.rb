@@ -29,8 +29,8 @@ module Status
 
   module V1
     class << self
-      def server_http
-        @server_http ||= Status::V1::HTTP.new('http://localhost:11000')
+      def http
+        @http ||= Status::V1::HTTP.new('http://localhost:11000')
       end
     end
   end

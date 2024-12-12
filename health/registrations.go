@@ -5,7 +5,6 @@ import (
 	"github.com/alexfalkowski/go-health/server"
 	"github.com/alexfalkowski/go-service/health"
 	"github.com/alexfalkowski/go-service/time"
-	h "github.com/alexfalkowski/status/health"
 	"go.uber.org/fx"
 )
 
@@ -13,7 +12,7 @@ import (
 type Params struct {
 	fx.In
 
-	Health *h.Config
+	Health *Config
 }
 
 // NewRegistrations for health.

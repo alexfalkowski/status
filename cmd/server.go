@@ -9,9 +9,9 @@ import (
 	"github.com/alexfalkowski/go-service/sync"
 	"github.com/alexfalkowski/go-service/telemetry"
 	"github.com/alexfalkowski/go-service/transport"
+	v1 "github.com/alexfalkowski/status/api/v1"
 	"github.com/alexfalkowski/status/config"
-	"github.com/alexfalkowski/status/server/health"
-	v1 "github.com/alexfalkowski/status/server/v1"
+	"github.com/alexfalkowski/status/health"
 	"go.uber.org/fx"
 )
 
