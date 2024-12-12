@@ -1,4 +1,4 @@
-environment: production
+environment: development
 health:
   duration: 1s
   timeout: 1s

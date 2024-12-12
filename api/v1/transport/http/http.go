@@ -1,46 +1,38 @@
 package http
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"strconv"
 	"time"
+
+	hc "github.com/alexfalkowski/go-service/net/http/context"
+	"github.com/alexfalkowski/go-service/net/http/rest"
+	"github.com/alexfalkowski/go-service/net/http/status"
 )
 
 // Register for http.
-func Register(mux *http.ServeMux) {
-	mux.HandleFunc("GET /v1/status/{code}", func(w http.ResponseWriter, r *http.Request) {
-		query := r.URL.Query()
-		s := query.Get("sleep")
+func Register() {
+	rest.Get("/v1/status/{code}", func(ctx context.Context) (any, error) {
+		req := hc.Request(ctx)
+		query := req.URL.Query()
 
+		s := query.Get("sleep")
 		if s != "" {
 			t, err := time.ParseDuration(s)
 			if err != nil {
-				writeBadRequest(w, err)
-
-				return
+				return nil, status.Error(http.StatusBadRequest, err.Error())
 			}
 
 			time.Sleep(t)
 		}
 
-		c, err := strconv.Atoi(r.PathValue("code"))
+		c, err := strconv.Atoi(req.PathValue("code"))
 		if err != nil {
-			writeBadRequest(w, err)
-
-			return
+			return nil, status.Error(http.StatusBadRequest, err.Error())
 		}
 
-		w.WriteHeader(c)
-		w.Write([]byte(fmt.Sprintf("%d %s", c, http.StatusText(c)))) //nolint:errcheck
+		return nil, status.Error(c, fmt.Sprintf("%d %s", c, http.StatusText(c)))
 	})
-}
-
-func writeBadRequest(w http.ResponseWriter, err error) {
-	writeError(w, http.StatusBadRequest, err)
-}
-
-func writeError(w http.ResponseWriter, status int, err error) {
-	w.WriteHeader(status)
-	w.Write([]byte(err.Error())) //nolint:errcheck
 }
