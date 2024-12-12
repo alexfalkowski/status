@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.164.0](https://github.com/alexfalkowski/status/releases/tag/v1.164.0) - 2024-12-12
+
+- [`40ff92e`](https://github.com/alexfalkowski/status/commit/40ff92ed961a47dfc105998f08fec71fe41d669b) feat(api): use rest (#474)
+
 ## [v1.163.0](https://github.com/alexfalkowski/status/releases/tag/v1.163.0) - 2024-12-12
 
 - [`af1389c`](https://github.com/alexfalkowski/status/commit/af1389c29cb32ba0c887325cc795ad041c9e03bd) feat(package): remove server (#473)
