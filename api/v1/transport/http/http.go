@@ -12,9 +12,12 @@ import (
 	"github.com/alexfalkowski/go-service/net/http/status"
 )
 
+// Response for route.
+type Response any
+
 // Register for http.
 func Register() {
-	rest.Get("/v1/status/{code}", func(ctx context.Context) (any, error) {
+	rest.Get("/v1/status/{code}", func(ctx context.Context) (*Response, error) {
 		req := hc.Request(ctx)
 		query := req.URL.Query()
 
