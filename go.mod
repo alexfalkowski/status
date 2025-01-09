@@ -6,7 +6,7 @@ toolchain go1.23.0
 
 require (
 	github.com/alexfalkowski/go-health v1.20.0
-	github.com/alexfalkowski/go-service v1.356.1
+	github.com/alexfalkowski/go-service v1.357.1
 	go.uber.org/fx v1.23.0
 )
 
@@ -36,7 +36,7 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/go-redis/cache/v9 v9.0.0 // indirect
-	github.com/go-resty/resty/v2 v2.16.2 // indirect
+	github.com/go-resty/resty/v2 v2.16.3 // indirect
 	github.com/go-sprout/sprout v0.6.0 // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/goccy/go-json v0.10.4 // indirect
