@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.201.1](https://github.com/alexfalkowski/status/releases/tag/v1.201.1) - 2025-01-18
+
+- [`7e6f574`](https://github.com/alexfalkowski/status/commit/7e6f57437637dbc764b7707755c8e1efa59dc5c1) fix(docker): add space (#537)
+
 ## [v1.201.0](https://github.com/alexfalkowski/status/releases/tag/v1.201.0) - 2025-01-18
 
 - [`e8d4459`](https://github.com/alexfalkowski/status/commit/e8d44592af53a803efdd1aaeb1239c37bff47d40) feat(docker): create a statically linked binary (#536)
