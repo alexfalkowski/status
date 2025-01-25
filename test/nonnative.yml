@@ -1,7 +1,8 @@
-version: 1.0
+version: "1.0"
+url: http://localhost:11000
+wait: 1
 processes:
-  -
-    name: server
+  - name: server
     go:
       tools: [cover]
       output: reports
