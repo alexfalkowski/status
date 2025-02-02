@@ -33,8 +33,8 @@ GEM
       bigdecimal
     cucumber-gherkin (27.0.0)
       cucumber-messages (>= 19.1.4, < 23)
-    cucumber-html-formatter (21.8.0)
-      cucumber-messages (> 19, < 27)
+    cucumber-html-formatter (21.9.0)
+      cucumber-messages (> 19, < 28)
     cucumber-messages (22.0.0)
     cucumber-tag-expressions (6.1.2)
     deep_merge (1.2.2)
