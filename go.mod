@@ -5,7 +5,7 @@ go 1.23.3
 toolchain go1.23.6
 
 require (
-	github.com/alexfalkowski/go-health v1.20.1
+	github.com/alexfalkowski/go-health v1.21.0
 	github.com/alexfalkowski/go-service v1.413.0
 	go.uber.org/fx v1.23.0
 )
