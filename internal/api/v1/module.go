@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"github.com/alexfalkowski/status/api/v1/transport/http"
+	"github.com/alexfalkowski/status/internal/api/v1/transport/http"
 	"go.uber.org/fx"
 )
 
