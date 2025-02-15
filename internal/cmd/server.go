@@ -18,6 +18,6 @@ func RegisterServer(command *cmd.Command) {
 		module.Module, debug.Module, feature.Module,
 		telemetry.Module, transport.Module,
 		health.Module, config.Module,
-		v1.Module, Module,
+		v1.Module, cmd.Module,
 	)
 }
