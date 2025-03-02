@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/alexfalkowski/go-health v1.22.0
-	github.com/alexfalkowski/go-service v1.472.0
+	github.com/alexfalkowski/go-service v1.473.0
 	go.uber.org/fx v1.23.0
 )
 
