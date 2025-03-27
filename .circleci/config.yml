@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build-service:
     docker:
-      - image: alexfalkowski/go:2.2
+      - image: alexfalkowski/go:2.3
     working_directory: ~/status
     steps:
       - checkout
@@ -19,6 +19,7 @@ jobs:
           keys:
             - status-ruby-cache-{{ checksum "test/Gemfile.lock" }}
             - status-ruby-cache-
+      - run: make clean
       - run: make dep
       - save_cache:
           name: save go deps
@@ -35,6 +36,7 @@ jobs:
           keys:
             - status-go-build-cache-{{ checksum "go.sum" }}
             - status-go-build-cache-
+      - run: make clean
       - run: make lint
       - run: make sec
       - run: make features
@@ -53,7 +55,7 @@ jobs:
     resource_class: large
   build-docker:
     docker:
-      - image: alexfalkowski/go:2.2
+      - image: alexfalkowski/go:2.3
     working_directory: ~/status
     steps:
       - checkout
@@ -76,7 +78,7 @@ jobs:
     resource_class: large
   push-docker:
     docker:
-      - image: alexfalkowski/go:2.2
+      - image: alexfalkowski/go:2.3
     working_directory: ~/status
     steps:
       - checkout
