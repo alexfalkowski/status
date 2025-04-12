@@ -10,6 +10,7 @@ import (
 	hc "github.com/alexfalkowski/go-service/net/http/context"
 	"github.com/alexfalkowski/go-service/net/http/rest"
 	"github.com/alexfalkowski/go-service/net/http/status"
+	"github.com/alexfalkowski/go-service/strings"
 )
 
 // Response for route.
@@ -21,8 +22,7 @@ func Register() {
 		req := hc.Request(ctx)
 		query := req.URL.Query()
 
-		s := query.Get("sleep")
-		if s != "" {
+		if s := query.Get("sleep"); !strings.IsEmpty(s) {
 			t, err := time.ParseDuration(s)
 			if err != nil {
 				return nil, status.Error(http.StatusBadRequest, err.Error())
