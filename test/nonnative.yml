@@ -7,9 +7,10 @@ processes:
       output: reports
       executable: ../status
       command: server
+      parameters: ["-i env:STATUS_CONFIG_FILE"]
     timeout: 5
     host: 127.0.0.1
     port: 11000
     log: reports/server.log
     environment:
-      CONFIG_FILE: .config/server.yml
+      STATUS_CONFIG_FILE: .config/server.yml
