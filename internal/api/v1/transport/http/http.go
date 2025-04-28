@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	hc "github.com/alexfalkowski/go-service/net/http/context"
+	"github.com/alexfalkowski/go-service/net/http/meta"
 	"github.com/alexfalkowski/go-service/net/http/rest"
 	"github.com/alexfalkowski/go-service/net/http/status"
 	"github.com/alexfalkowski/go-service/strings"
@@ -19,7 +19,7 @@ type Response any
 // Register for http.
 func Register() {
 	rest.Get("/v1/status/{code}", func(ctx context.Context) (*Response, error) {
-		req := hc.Request(ctx)
+		req := meta.Request(ctx)
 		query := req.URL.Query()
 
 		if s := query.Get("sleep"); !strings.IsEmpty(s) {
