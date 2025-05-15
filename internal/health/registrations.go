@@ -20,6 +20,7 @@ func NewRegistrations(params Params) health.Registrations {
 	d := time.MustParseDuration(params.Health.Duration)
 	registrations := health.Registrations{
 		server.NewRegistration("noop", d, checker.NewNoopChecker()),
+		server.NewOnlineRegistration(d, d),
 	}
 
 	return registrations
