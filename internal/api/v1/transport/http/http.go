@@ -7,10 +7,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/alexfalkowski/go-service/net/http/meta"
-	"github.com/alexfalkowski/go-service/net/http/rest"
-	"github.com/alexfalkowski/go-service/net/http/status"
-	"github.com/alexfalkowski/go-service/strings"
+	"github.com/alexfalkowski/go-service/v2/net/http/meta"
+	"github.com/alexfalkowski/go-service/v2/net/http/rest"
+	"github.com/alexfalkowski/go-service/v2/net/http/status"
+	"github.com/alexfalkowski/go-service/v2/strings"
 )
 
 // Response for route.
