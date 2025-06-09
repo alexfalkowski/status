@@ -1,14 +1,11 @@
 package health
 
-import (
-	"github.com/alexfalkowski/status/internal/health/transport/http"
-	"go.uber.org/fx"
-)
+import "go.uber.org/fx"
 
 // Module for fx.
 var Module = fx.Options(
-	fx.Provide(http.NewHealthObserver),
-	fx.Provide(http.NewLivenessObserver),
-	fx.Provide(http.NewReadinessObserver),
-	fx.Provide(NewRegistrations),
+	fx.Provide(registrations),
+	fx.Provide(httpHealthObserver),
+	fx.Provide(httpLivenessObserver),
+	fx.Provide(httpReadinessObserver),
 )
