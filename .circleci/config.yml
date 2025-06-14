@@ -39,6 +39,7 @@ jobs:
       - run: make clean
       - run: make lint
       - run: make sec
+      - run: make trivy-repo
       - run: make features
       - run: make benchmarks
       - run: make analyse
@@ -54,9 +55,20 @@ jobs:
           path: test/reports
       - run: make codecov-upload
     resource_class: large
-  build-docker:
+  release:
     docker:
-      - image: alexfalkowski/go:2.26
+      - image: alexfalkowski/release:3.25
+    working_directory: ~/status
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
+      - run: make pull
+      - run: release
+    resource_class: large
+  build-docker-amd64:
+    docker:
+      - image: alexfalkowski/go:2.27
     working_directory: ~/status
     steps:
       - checkout
@@ -64,22 +76,25 @@ jobs:
       - run: git submodule update --init
       - setup_remote_docker:
           docker_layer_caching: true
-      - run: make build-docker
-      - run: make trivy
+      - run: make platform=amd64 build-docker
+      - run: make platform=amd64 trivy-image
     resource_class: large
-  release:
+  build-docker-arm64:
     docker:
-      - image: alexfalkowski/release:3.24
+      - image: alexfalkowski/go:2.27
     working_directory: ~/status
     steps:
       - checkout
       - run: git submodule sync
       - run: git submodule update --init
-      - run: release
-    resource_class: large
-  push-docker:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: make platform=arm64 build-docker
+      - run: make platform=arm64 trivy-image
+    resource_class: arm.medium
+  push-docker-amd64:
     docker:
-      - image: alexfalkowski/go:2.26
+      - image: alexfalkowski/go:2.27
     working_directory: ~/status
     steps:
       - checkout
@@ -91,15 +106,50 @@ jobs:
       - run:
           name: make login
           command: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-      - run: make push-docker
+      - run: make platform=amd64 push-docker
+    resource_class: large
+  push-docker-arm64:
+    docker:
+      - image: alexfalkowski/go:2.27
+    working_directory: ~/status
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
+      - run: make pull
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: make login
+          command: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - run: make platform=arm64 push-docker
+    resource_class: arm.medium
+  manifest-docker:
+    docker:
+      - image: alexfalkowski/go:2.27
+    working_directory: ~/status
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
+      - run: make pull
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: make login
+          command: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - run: make manifest-docker
     resource_class: large
 
 workflows:
   status:
     jobs:
       - build-service
-      - build-docker:
-          context: gh
+      - build-docker-amd64:
+          filters:
+            branches:
+              ignore: master
+      - build-docker-arm64:
           filters:
             branches:
               ignore: master
@@ -110,10 +160,25 @@ workflows:
           filters:
             branches:
               only: master
-      - push-docker:
+      - push-docker-amd64:
           context: docker
           requires:
             - release
+          filters:
+            branches:
+              only: master
+      - push-docker-arm64:
+          context: docker
+          requires:
+            - release
+          filters:
+            branches:
+              only: master
+      - manifest-docker:
+          context: docker
+          requires:
+            - push-docker-amd64
+            - push-docker-arm64
           filters:
             branches:
               only: master
