@@ -1,11 +1,11 @@
 package http
 
 import (
-	"context"
 	"fmt"
 	"strconv"
 	"time"
 
+	"github.com/alexfalkowski/go-service/v2/context"
 	"github.com/alexfalkowski/go-service/v2/net/http"
 	"github.com/alexfalkowski/go-service/v2/net/http/meta"
 	"github.com/alexfalkowski/go-service/v2/net/http/rest"
