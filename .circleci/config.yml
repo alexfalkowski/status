@@ -10,24 +10,24 @@ jobs:
       - run: git submodule sync
       - run: git submodule update --init
       - restore_cache:
-          name: restore go deps
+          name: restore go cache
           keys:
             - status-go-cache-{{ checksum "go.sum" }}
             - status-go-cache-
       - restore_cache:
-          name: restore ruby deps
+          name: restore ruby cache
           keys:
             - status-ruby-cache-{{ checksum "test/Gemfile.lock" }}
             - status-ruby-cache-
       - run: make clean
       - run: make dep
       - save_cache:
-          name: save go deps
+          name: save go cache
           key: status-go-cache-{{ checksum "go.sum" }}
           paths:
-            - /home/circleci/go/pkg/mod
+            - ~/go/pkg/mod
       - save_cache:
-          name: save ruby deps
+          name: save ruby cache
           key: status-ruby-cache-{{ checksum "test/Gemfile.lock" }}
           paths:
             - test/vendor
@@ -37,7 +37,17 @@ jobs:
             - status-go-build-cache-{{ checksum "go.sum" }}
             - status-go-build-cache-
       - run: make clean
+      - restore_cache:
+          name: restore go lint cache
+          keys:
+            - status-go-lint-cache-{{ checksum "go.sum" }}
+            - status-go-lint-cache-
       - run: make lint
+      - save_cache:
+          name: save go lint cache
+          key: status-go-lint-cache-{{ checksum "go.sum" }}
+          paths:
+            - ~/.cache/golangci-lint
       - run: make sec
       - run: make trivy-repo
       - run: make features
@@ -47,7 +57,7 @@ jobs:
           name: save go build cache
           key: status-go-build-cache-{{ checksum "go.sum" }}
           paths:
-            - /home/circleci/.cache/go-build
+            - ~/.cache/go-build
       - run: make coverage
       - store_test_results:
           path: test/reports
