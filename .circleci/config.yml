@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build-service:
     docker:
-      - image: alexfalkowski/go:2.40
+      - image: alexfalkowski/go:2.41
     working_directory: ~/status
     steps:
       - checkout
@@ -39,13 +39,13 @@ jobs:
       - restore_cache:
           name: restore go lint cache
           keys:
-            - status-go-lint-cache-{{ checksum "go.sum" }}-{{ checksum "~/.go-version" }}
+            - status-go-lint-cache-{{ checksum "go.sum" }}-{{ checksum "~/.go-lint-version" }}
             - status-go-lint-cache-
       - run: make clean
       - run: make lint
       - save_cache:
           name: save go lint cache
-          key: status-go-lint-cache-{{ checksum "go.sum" }}-{{ checksum "~/.go-version" }}
+          key: status-go-lint-cache-{{ checksum "go.sum" }}-{{ checksum "~/.go-lint-version" }}
           paths:
             - ~/.cache/golangci-lint
       - run: make sec
@@ -78,7 +78,7 @@ jobs:
     resource_class: large
   build-docker-amd64:
     docker:
-      - image: alexfalkowski/go:2.40
+      - image: alexfalkowski/go:2.41
     working_directory: ~/status
     steps:
       - checkout
@@ -91,7 +91,7 @@ jobs:
     resource_class: large
   build-docker-arm64:
     docker:
-      - image: alexfalkowski/go:2.40
+      - image: alexfalkowski/go:2.41
     working_directory: ~/status
     steps:
       - checkout
@@ -104,7 +104,7 @@ jobs:
     resource_class: arm.medium
   push-docker-amd64:
     docker:
-      - image: alexfalkowski/go:2.40
+      - image: alexfalkowski/go:2.41
     working_directory: ~/status
     steps:
       - checkout
@@ -120,7 +120,7 @@ jobs:
     resource_class: large
   push-docker-arm64:
     docker:
-      - image: alexfalkowski/go:2.40
+      - image: alexfalkowski/go:2.41
     working_directory: ~/status
     steps:
       - checkout
@@ -136,7 +136,7 @@ jobs:
     resource_class: arm.medium
   manifest-docker:
     docker:
-      - image: alexfalkowski/go:2.40
+      - image: alexfalkowski/go:2.41
     working_directory: ~/status
     steps:
       - checkout
