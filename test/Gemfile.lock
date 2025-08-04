@@ -110,7 +110,7 @@ GEM
     rake (13.3.0)
     rbs (3.9.4)
       logger
-    regexp_parser (2.10.0)
+    regexp_parser (2.11.0)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
