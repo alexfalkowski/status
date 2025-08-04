@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.502.0](https://github.com/alexfalkowski/status/releases/tag/v1.502.0) - 2025-08-04
+
+- [`a7ddd4d`](https://github.com/alexfalkowski/status/commit/a7ddd4d8e69acacf4263ca2f066a2698591c6659) feat(deps): upgraded github.com/alexfalkowski/go-service/v2 to v2.113.0 (#964)
+- [`d27b00d`](https://github.com/alexfalkowski/status/commit/d27b00db727358ca5dc009f3f0f9b7bd622cf728) build(deps): upgraded github.com/alexfalkowski/bin (#963)
+- [`63b428f`](https://github.com/alexfalkowski/status/commit/63b428fbc2c7174e037d67763c0883282f566358) build(ci): use latest published images (#962)
+- [`af10234`](https://github.com/alexfalkowski/status/commit/af102347082bc23780ef63cfaeaf51e0becf64a8) build(ci): use latest published images (#961)
+
 ## [v1.501.0](https://github.com/alexfalkowski/status/releases/tag/v1.501.0) - 2025-08-03
 
 - [`266c7b0`](https://github.com/alexfalkowski/status/commit/266c7b0715beabdba26ac40424f04b0f6c598011) feat(deps): upgraded github.com/alexfalkowski/go-service/v2 to v2.112.0 (#960)
