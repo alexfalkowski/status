@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build-service:
     docker:
-      - image: alexfalkowski/go:2.68
+      - image: alexfalkowski/go:2.69
     working_directory: ~/status
     steps:
       - checkout:
@@ -80,7 +80,7 @@ jobs:
     resource_class: large
   build-docker-amd64:
     docker:
-      - image: alexfalkowski/go:2.68
+      - image: alexfalkowski/go:2.69
     working_directory: ~/status
     steps:
       - checkout:
@@ -94,7 +94,7 @@ jobs:
     resource_class: large
   build-docker-arm64:
     docker:
-      - image: alexfalkowski/go:2.68
+      - image: alexfalkowski/go:2.69
     working_directory: ~/status
     steps:
       - checkout:
@@ -108,7 +108,7 @@ jobs:
     resource_class: arm.medium
   push-docker-amd64:
     docker:
-      - image: alexfalkowski/go:2.68
+      - image: alexfalkowski/go:2.69
     working_directory: ~/status
     steps:
       - checkout:
@@ -125,7 +125,7 @@ jobs:
     resource_class: large
   push-docker-arm64:
     docker:
-      - image: alexfalkowski/go:2.68
+      - image: alexfalkowski/go:2.69
     working_directory: ~/status
     steps:
       - checkout:
@@ -142,7 +142,7 @@ jobs:
     resource_class: arm.medium
   manifest-docker:
     docker:
-      - image: alexfalkowski/go:2.68
+      - image: alexfalkowski/go:2.69
     working_directory: ~/status
     steps:
       - checkout:
