@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.550.0](https://github.com/alexfalkowski/status/releases/tag/v1.550.0) - 2025-10-15
+
+- [`012f024`](https://github.com/alexfalkowski/status/commit/012f02438a0f97c7cf2aaa2809d0398edd4d29d5) feat(deps): bump bin from `09a61a1` to `5563606` (#1051)
+- [`5de71dd`](https://github.com/alexfalkowski/status/commit/5de71ddd8f04f194f9650cfa01c00e880855a9d4) build(ci): use latest published images (#1050)
+- [`a4171da`](https://github.com/alexfalkowski/status/commit/a4171dacbdbfc600950423441ff963bd0b498072) build(ci): use latest published images (#1049)
+- [`d41401d`](https://github.com/alexfalkowski/status/commit/d41401d82750fb7308fc595cacf20fce317701d1) test(deps): bump sinatra from 4.1.1 to 4.2.0 in /test (#1048)
+- [`a4da6e1`](https://github.com/alexfalkowski/status/commit/a4da6e1d94499e42765d3610ee82d7c935d9da80) test(deps): bump rack from 3.2.2 to 3.2.3 in /test (#1047)
+
 ## [v1.549.0](https://github.com/alexfalkowski/status/releases/tag/v1.549.0) - 2025-10-10
 
 - [`b97a5bf`](https://github.com/alexfalkowski/status/commit/b97a5bf4a14e2c0a4f4cdb55dbb7e17219256dbf) feat(deps): bump github.com/alexfalkowski/go-service/v2 from 2.170.0 to 2.171.0 (#1046)
