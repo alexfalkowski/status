@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/alexfalkowski/go-health/v2 v2.4.0
-	github.com/alexfalkowski/go-service/v2 v2.194.0
+	github.com/alexfalkowski/go-service/v2 v2.195.0
 )
 
 require (
