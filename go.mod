@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/alexfalkowski/go-health/v2 v2.4.0
-	github.com/alexfalkowski/go-service/v2 v2.199.0
+	github.com/alexfalkowski/go-service/v2 v2.200.0
 )
 
 require (
@@ -15,7 +15,7 @@ require (
 	github.com/BurntSushi/toml v1.5.0 // indirect
 	github.com/KimMachineGun/automemlimit v0.7.5 // indirect
 	github.com/aead/cmac v0.0.0-20160719120800-7af84192f0b1 // indirect
-	github.com/arl/statsviz v0.7.2 // indirect
+	github.com/arl/statsviz v0.7.3 // indirect
 	github.com/avfs/avfs v0.35.0 // indirect
 	github.com/beevik/ntp v1.5.0 // indirect
 	github.com/beevik/nts v0.2.1 // indirect
