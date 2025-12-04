@@ -12,6 +12,7 @@ linters:
     - noinlineerr
     - gochecknoglobals
     - paralleltest
+    - revive
     - tagalign
     - wrapcheck
     - wsl
