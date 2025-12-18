@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.589.0](https://github.com/alexfalkowski/status/releases/tag/v1.589.0) - 2025-12-18
+
+- [`e1a5b57`](https://github.com/alexfalkowski/status/commit/e1a5b57e037624eca16d01b5b22ddf02fb3689b5) feat(deps): upgraded github.com/alexfalkowski/go-service/v2 to v2.221.0 (#1122)
+- [`b6d859b`](https://github.com/alexfalkowski/status/commit/b6d859b1e3295075adfacf66d71c34b2ad4ab4c3) build(ci): use latest published images (#1121)
+- [`770e7e1`](https://github.com/alexfalkowski/status/commit/770e7e123baea0e2a5cca9e95a933843d84ae759) test(deps): update bundler to v4.0.2 (#1120)
+- [`a0504c1`](https://github.com/alexfalkowski/status/commit/a0504c14e89ec712f84c51f63a63b46e8ee29fc9) build(deps): upgraded github.com/alexfalkowski/bin (#1119)
+- [`8bce8f1`](https://github.com/alexfalkowski/status/commit/8bce8f19e7fc53748b0c20f7a22fa67ac2a6bb53) build(ci): use latest published images (#1118)
+- [`3b6a794`](https://github.com/alexfalkowski/status/commit/3b6a794cc3866929d109264c9577b39c8e9cb285) test(deps): bump rubocop from 1.81.7 to 1.82.0 in /test (#1117)
+
 ## [v1.588.0](https://github.com/alexfalkowski/status/releases/tag/v1.588.0) - 2025-12-17
 
 - [`a25dba5`](https://github.com/alexfalkowski/status/commit/a25dba5e719497f5b6b0a62806bda8a316a04738) feat(deps): upgraded github.com/alexfalkowski/go-service/v2 to v2.220.0 (#1116)
