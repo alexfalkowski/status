@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/alexfalkowski/go-health/v2 v2.6.0
-	github.com/alexfalkowski/go-service/v2 v2.233.0
+	github.com/alexfalkowski/go-service/v2 v2.235.0
 )
 
 require (
@@ -71,7 +71,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/oklog/ulid v1.3.1 // indirect
-	github.com/open-feature/go-sdk v1.17.0 // indirect
+	github.com/open-feature/go-sdk v1.17.1 // indirect
 	github.com/open-feature/go-sdk-contrib/hooks/open-telemetry v0.3.6 // indirect
 	github.com/pbnjay/memory v0.0.0-20210728143218-7b4eea64cf58 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
@@ -91,7 +91,7 @@ require (
 	github.com/shirou/gopsutil/v4 v4.25.12 // indirect
 	github.com/sony/gobreaker v1.0.0 // indirect
 	github.com/spf13/cast v1.10.0 // indirect
-	github.com/standard-webhooks/standard-webhooks/libraries v0.0.0-20251210175704-b03a68fe8b19 // indirect
+	github.com/standard-webhooks/standard-webhooks/libraries v0.0.0-20260113211855-b57537b4939a // indirect
 	github.com/tklauser/go-sysconf v0.3.16 // indirect
 	github.com/tklauser/numcpus v0.11.0 // indirect
 	github.com/urfave/negroni/v3 v3.1.1 // indirect
