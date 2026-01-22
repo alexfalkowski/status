@@ -10,9 +10,10 @@ import (
 
 func register(name env.Name, srv *server.Server, cfg *Config) {
 	d := time.MustParseDuration(cfg.Duration)
+	t := time.MustParseDuration(cfg.Timeout)
 	regs := health.Registrations{
 		server.NewRegistration("noop", d, checker.NewNoopChecker()),
-		server.NewOnlineRegistration(d, d),
+		server.NewOnlineRegistration(t, d),
 	}
 
 	srv.Register(name.String(), regs...)
