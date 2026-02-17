@@ -3,7 +3,7 @@ module github.com/alexfalkowski/status
 go 1.26.0
 
 require (
-	github.com/alexfalkowski/go-health/v2 v2.13.0
+	github.com/alexfalkowski/go-health/v2 v2.14.0
 	github.com/alexfalkowski/go-service/v2 v2.282.0
 )
 
