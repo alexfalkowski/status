@@ -67,6 +67,17 @@ jobs:
           path: test/reports
       - run: make codecov-upload
     resource_class: arm.large
+  sync:
+    docker:
+      - image: alexfalkowski/go:2.118
+    working_directory: ~/infraops
+    steps:
+      - checkout:
+          method: blobless
+      - run: git submodule sync
+      - run: git submodule update --init
+      - run: make sync push
+    resource_class: arm.large
   version:
     docker:
       - image: alexfalkowski/release:5.57
@@ -89,6 +100,12 @@ jobs:
             - status-go-build-cache-
       - run: version
       - run: package
+    resource_class: arm.large
+  wait-all:
+    docker:
+      - image: alexfalkowski/go:2.118
+    steps:
+      - run: echo "all applicable jobs finished"
     resource_class: arm.large
   build-docker-amd64:
     docker:
@@ -182,6 +199,14 @@ workflows:
           filters:
             branches:
               ignore: master
+      - sync:
+          requires:
+            - build-service
+            - build-docker-amd64
+            - build-docker-arm64
+          filters:
+            branches:
+              ignore: master
       - version:
           context: gh
           requires:
@@ -211,3 +236,13 @@ workflows:
           filters:
             branches:
               only: master
+      - wait-all:
+          requires:
+            - build-service
+            - sync
+            - build-docker-amd64
+            - build-docker-arm64
+            - version
+            - push-docker-amd64
+            - push-docker-arm64
+            - manifest-docker
