@@ -3,8 +3,8 @@ module github.com/alexfalkowski/status
 go 1.26.0
 
 require (
-	github.com/alexfalkowski/go-health/v2 v2.17.0
-	github.com/alexfalkowski/go-service/v2 v2.318.0
+	github.com/alexfalkowski/go-health/v2 v2.18.0
+	github.com/alexfalkowski/go-service/v2 v2.322.0
 )
 
 require (
@@ -14,9 +14,9 @@ require (
 	filippo.io/edwards25519 v1.2.0 // indirect
 	github.com/BurntSushi/toml v1.6.0 // indirect
 	github.com/KimMachineGun/automemlimit v0.7.5 // indirect
-	github.com/XSAM/otelsql v0.41.0 // indirect
+	github.com/XSAM/otelsql v0.42.0 // indirect
 	github.com/aead/cmac v0.0.0-20160719120800-7af84192f0b1 // indirect
-	github.com/alexfalkowski/go-sync v1.19.0 // indirect
+	github.com/alexfalkowski/go-sync v1.19.3 // indirect
 	github.com/arl/statsviz v0.8.0 // indirect
 	github.com/avfs/avfs v0.35.0 // indirect
 	github.com/beevik/ntp v1.5.0 // indirect
@@ -41,7 +41,7 @@ require (
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.30.1 // indirect
+	github.com/go-playground/validator/v10 v10.30.2 // indirect
 	github.com/go-sprout/sprout v1.0.3 // indirect
 	github.com/go-sql-driver/mysql v1.9.3 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
