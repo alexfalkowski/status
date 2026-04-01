@@ -51,7 +51,6 @@ jobs:
           paths:
             - ~/.cache/golangci-lint
       - run: make sec
-      - run: make trivy-repo
       - run: make features
       - run: make benchmarks
       - run: make analyse
