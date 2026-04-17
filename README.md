@@ -6,7 +6,7 @@
 
 # Status
 
-This is just an alternative to using https://httpstat.us/
+This is just an alternative to using <https://httpstat.us/>
 
 ## Background
 
@@ -29,12 +29,13 @@ Allows to set the status code of the response.
 ```http
 GET /v1/status/{code}
 ```
+
 > [!NOTE]
 > `code` is a number, e.g 200, 400, etc.
 
 | Parameter | Description                                                                  |
 | --------- | ---------------------------------------------------------------------------- |
-| sleep     | The duration to sleep please check out https://pkg.go.dev/time#ParseDuration |
+| sleep     | The duration to sleep please check out <https://pkg.go.dev/time#ParseDuration> |
 
 #### Response
 
@@ -73,6 +74,7 @@ The project follows the structure in [golang-standards/project-layout](https://g
 ### Dependencies
 
 Please make sure that you have the following installed:
+
 - [Ruby](.ruby-version)
 - Golang
 
