@@ -31,7 +31,7 @@ GET /v1/status/{code}
 ```
 
 > [!NOTE]
-> `code` is a number, e.g 200, 400, etc.
+> `code` must be a three-digit HTTP status code, e.g 200, 400, 500.
 
 | Parameter | Description                                                                  |
 | --------- | ---------------------------------------------------------------------------- |

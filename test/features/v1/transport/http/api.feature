@@ -18,6 +18,8 @@ Feature: Server
 
     Examples:
       | code    |
+      | 42      |
+      | 1000    |
       | invalid |
 
   Scenario Outline: Set invalid sleep

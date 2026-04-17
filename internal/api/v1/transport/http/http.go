@@ -1,6 +1,7 @@
 package http
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"time"
@@ -12,6 +13,8 @@ import (
 	"github.com/alexfalkowski/go-service/v2/net/http/status"
 	"github.com/alexfalkowski/go-service/v2/strings"
 )
+
+var errInvalidStatusCode = errors.New("invalid status code")
 
 // Response for route.
 type Response any
@@ -31,11 +34,24 @@ func Register() {
 			time.Sleep(t)
 		}
 
-		c, err := strconv.Atoi(req.PathValue("code"))
+		code, err := parseStatusCode(req.PathValue("code"))
 		if err != nil {
 			return nil, status.Error(http.StatusBadRequest, err.Error())
 		}
 
-		return nil, status.Error(c, fmt.Sprintf("%d %s", c, http.StatusText(c)))
+		return nil, status.Error(code, fmt.Sprintf("%d %s", code, http.StatusText(code)))
 	})
+}
+
+func parseStatusCode(code string) (int, error) {
+	codeValue, err := strconv.Atoi(code)
+	if err != nil {
+		return 0, err
+	}
+
+	if codeValue < 100 || codeValue > 999 {
+		return 0, errInvalidStatusCode
+	}
+
+	return codeValue, nil
 }
