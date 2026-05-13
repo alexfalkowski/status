@@ -1,12 +1,10 @@
 # AGENTS.md
 
-## Shared skill
+## Shared skills
 
-Use the shared `coding-standards` skill from `./bin/skills/coding-standards`
-for workflow, review, testing, documentation, and PR conventions.
-
-This file is intentionally limited to repo-specific context so we do not
-duplicate the shared guidance.
+This repository uses the shared skills from `bin/skills/`. Read
+`bin/AGENTS.md` for the canonical shared skill list and use the smallest
+matching skill for the task.
 
 ## Repository purpose
 
