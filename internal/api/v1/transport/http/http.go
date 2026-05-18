@@ -2,7 +2,6 @@ package http
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 	"time"
 
@@ -28,7 +27,7 @@ func Register() {
 		if s := query.Get("sleep"); !strings.IsEmpty(s) {
 			t, err := time.ParseDuration(s)
 			if err != nil {
-				return nil, status.Error(http.StatusBadRequest, err.Error())
+				return nil, status.SafeError(http.StatusBadRequest, err)
 			}
 
 			time.Sleep(t)
@@ -36,10 +35,10 @@ func Register() {
 
 		code, err := parseStatusCode(req.PathValue("code"))
 		if err != nil {
-			return nil, status.Error(http.StatusBadRequest, err.Error())
+			return nil, status.SafeError(http.StatusBadRequest, err)
 		}
 
-		return nil, status.Error(code, fmt.Sprintf("%d %s", code, http.StatusText(code)))
+		return nil, status.Errorf(code, "%d %s", code, http.StatusText(code))
 	})
 }
 
