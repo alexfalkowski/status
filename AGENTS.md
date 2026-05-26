@@ -62,6 +62,13 @@ Useful direct run while debugging:
 - The `/v1/status/{code}` handler also accepts `sleep=<duration>` and parses
   it with `time.ParseDuration`.
 
+## Intentional design choices
+
+- `/healthz` is intentionally wired to the shared health module's online
+  registration, which checks external internet connectivity by default. This is
+  expected for this service; do not flag the external egress dependency as an
+  issue unless the task is specifically about changing health semantics.
+
 ## CI signal
 
 Use the shared skill for validation strategy. The repo-specific CI source of

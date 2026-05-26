@@ -1,19 +1,20 @@
 package http
 
 import (
-	"errors"
 	"strconv"
-	"time"
 
 	"github.com/alexfalkowski/go-service/v2/context"
+	"github.com/alexfalkowski/go-service/v2/errors"
 	"github.com/alexfalkowski/go-service/v2/net/http"
 	"github.com/alexfalkowski/go-service/v2/net/http/meta"
 	"github.com/alexfalkowski/go-service/v2/net/http/rest"
 	"github.com/alexfalkowski/go-service/v2/net/http/status"
 	"github.com/alexfalkowski/go-service/v2/strings"
+	"github.com/alexfalkowski/go-service/v2/time"
 )
 
-var errInvalidStatusCode = errors.New("invalid status code")
+// ErrInvalidStatusCode is returned when the requested status code is unsupported.
+var ErrInvalidStatusCode = errors.New("status: invalid status code")
 
 // Response for route.
 type Response any
@@ -30,7 +31,14 @@ func Register() {
 				return nil, status.SafeError(http.StatusBadRequest, err)
 			}
 
-			time.Sleep(t)
+			timer := time.NewTimer(t)
+			defer timer.Stop()
+
+			select {
+			case <-ctx.Done():
+				return nil, status.SafeError(http.StatusRequestTimeout, ctx.Err())
+			case <-timer.C:
+			}
 		}
 
 		code, err := parseStatusCode(req.PathValue("code"))
@@ -48,8 +56,8 @@ func parseStatusCode(code string) (int, error) {
 		return 0, err
 	}
 
-	if codeValue < 100 || codeValue > 999 {
-		return 0, errInvalidStatusCode
+	if codeValue < 200 || codeValue > 999 {
+		return 0, ErrInvalidStatusCode
 	}
 
 	return codeValue, nil

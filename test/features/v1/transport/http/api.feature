@@ -19,6 +19,8 @@ Feature: Server
     Examples:
       | code    |
       | 42      |
+      | 100     |
+      | 199     |
       | 1000    |
       | invalid |
 

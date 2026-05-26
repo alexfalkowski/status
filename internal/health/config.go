@@ -12,6 +12,6 @@ import "github.com/alexfalkowski/go-service/v2/time"
 //   - Duration: the interval between health check executions.
 //   - Timeout: the maximum amount of time a health check is allowed to run.
 type Config struct {
-	Duration time.Duration `yaml:"duration,omitempty" json:"duration,omitempty" toml:"duration,omitempty"`
-	Timeout  time.Duration `yaml:"timeout,omitempty" json:"timeout,omitempty" toml:"timeout,omitempty"`
+	Duration time.Duration `yaml:"duration,omitempty" json:"duration,omitempty" toml:"duration,omitempty" validate:"gt=0"`
+	Timeout  time.Duration `yaml:"timeout,omitempty" json:"timeout,omitempty" toml:"timeout,omitempty" validate:"gt=0"`
 }
