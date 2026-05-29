@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'securerandom'
-
 require 'status/v1/http'
 
 module Status

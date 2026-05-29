@@ -1,47 +1,37 @@
 # frozen_string_literal: true
 
-When('I request to set the code {int} with HTTP') do |code|
-  opts = {
-    headers: {
-      request_id: SecureRandom.uuid, user_agent: 'Status-ruby-client/1.0 HTTP/1.0',
-      content_type: :json, accept: :json
-    },
-    read_timeout: 10, open_timeout: 10
-  }
-
-  @response = Status::V1.http.code(code, '1ms', opts)
+When('I request to set the code {int}') do |code|
+  @response = Status::V1.http.code(code, '1ms', Status::V1.http.options)
 end
 
-When('I request to set the invalid code {string} with HTTP') do |code|
-  opts = {
-    headers: {
-      request_id: SecureRandom.uuid, user_agent: 'Status-ruby-client/1.0 HTTP/1.0',
-      content_type: :json, accept: :json
-    },
-    read_timeout: 10, open_timeout: 10
-  }
-
-  @response = Status::V1.http.code(code, '1ms', opts)
+When('I request to set the code {int} without sleep') do |code|
+  @response = Status::V1.http.code(code, '', Status::V1.http.options)
 end
 
-When('I request to set the code {string} and invalid {string} for HTTP') do |code, sleep|
-  opts = {
-    headers: {
-      request_id: SecureRandom.uuid, user_agent: 'Status-ruby-client/1.0 HTTP/1.0',
-      content_type: :json, accept: :json
-    },
-    read_timeout: 10, open_timeout: 10
-  }
-
-  @response = Status::V1.http.code(code, sleep, opts)
+When('I request to set the code {int} and sleep {string}') do |code, sleep|
+  start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  @response = Status::V1.http.code(code, sleep, Status::V1.http.options)
+  @elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start
 end
 
-Then('I should receive a bad request response from HTTP') do
+When('I request to set the invalid code {string}') do |code|
+  @response = Status::V1.http.code(code, '1ms', Status::V1.http.options)
+end
+
+When('I request to set the code {string} and invalid {string}') do |code, sleep|
+  @response = Status::V1.http.code(code, sleep, Status::V1.http.options)
+end
+
+Then('I should receive a bad request response') do
   expect(@response.code).to eq(400)
   expect(@response.body.length).to be > 0
 end
 
-Then('I should receive a response with {int} from HTTP') do |code|
+Then('I should receive a response with {int} and {string}') do |code, body|
   expect(@response.code).to eq(code)
-  expect(@response.body.length).to be > 0
+  expect(@response.body.strip).to eq(body)
+end
+
+Then('I should receive the response in at least {int} ms') do |time|
+  expect(@elapsed * 1000).to be >= time
 end
