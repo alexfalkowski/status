@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-When('I request with HTTP which performs in {int} ms') do |time|
+When('I request which performs in {int} ms') do |time|
   opts = {
     headers: {
       request_id: SecureRandom.uuid, user_agent: 'Status-ruby-client/1.0 HTTP/1.0',
