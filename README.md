@@ -4,108 +4,182 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/alexfalkowski/status.svg)](https://pkg.go.dev/github.com/alexfalkowski/status)
 [![Stability: Active](https://masterminds.github.io/stability/active.svg)](https://masterminds.github.io/stability/active.html)
 
-# Status
+# 🩺 Status
 
-This is just an alternative to using <https://httpstat.us/>
+`status` is a small Go service for testing HTTP status-code handling and health endpoints.
+It is intended as a local, controllable alternative to depending on <https://httpstat.us/>
+from automated tests.
 
-## Background
+> [!NOTE]
+> This service is built for test fixtures, smoke tests, and client behavior checks. It is not a general-purpose public status-code proxy.
 
-As the alternative suffers from stability reason, I wanted to stop using it.
+## 🧭 Background
 
-### Why a service?
+External status-code services are useful, but their availability can make an
+otherwise deterministic test suite fail for reasons outside the project under
+test. Running this service locally keeps status-code and observability checks
+under your control.
 
-The service is needed for testing.
+## ⚡ Quick Start
 
-## Server
+After cloning the repository, initialize the shared `bin` submodule and install
+dependencies:
 
-Below we outline all the endpoints:
+```sh
+git submodule update --init
+make dep
+```
 
-### Status Code
+Build and run the service with the local test configuration:
 
-Allows to set the status code of the response.
+```sh
+make build
+./status server -i file:test/.config/server.yml
+```
 
-#### Request
+The local configuration binds the HTTP server to `localhost:11000`, so you can
+try it with:
+
+```sh
+curl -i http://localhost:11000/v1/status/200
+curl -i "http://localhost:11000/v1/status/503?sleep=50ms"
+```
+
+> [!IMPORTANT]
+> The root `Makefile` includes files from the `bin` submodule. Run `git submodule update --init` before using `make` in a fresh checkout.
+
+> [!TIP]
+> If you have `air` installed, `make dev` builds and runs the server in watch mode with `test/.config/server.yml`.
+
+## 🖥️ Server
+
+### 🔢 Status Code
+
+Returns the requested HTTP status code.
+
+#### 📥 Request
 
 ```http
 GET /v1/status/{code}
+GET /v1/status/{code}?sleep=50ms
 ```
 
 > [!NOTE]
-> `code` must be a three-digit HTTP status code, e.g 200, 400, 500.
+> `code` must parse as an integer from `200` through `999`. Values below `200`, values above `999`, and non-numeric values return `400 Bad Request`.
 
-| Parameter | Description                                                                  |
-| --------- | ---------------------------------------------------------------------------- |
-| sleep     | The duration to sleep please check out <https://pkg.go.dev/time#ParseDuration> |
+| Parameter | Location | Required | Description |
+| --------- | -------- | -------- | ----------- |
+| `code` | Path | Yes | Status code to return. Named codes include their standard reason phrase, such as `200 OK`. |
+| `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. |
 
-#### Response
+> [!CAUTION]
+> `sleep` intentionally delays the response. Keep durations short in tests so client timeouts and CI jobs do not wait longer than expected.
 
-The status with a description as text.
+#### 📤 Response
 
-Example:
+The response status is the requested code and the body is plain text:
 
 ```http
 200 OK
 ```
 
-## Health
+For codes without a standard reason phrase, the body contains the numeric code:
 
-The system defines a way to monitor all of it's dependencies.
+```http
+999
+```
 
-To configure we just need the have the following configuration:
+Invalid status codes or invalid `sleep` values return `400 Bad Request`.
+
+## 💓 Health
+
+The shared health module exposes health, liveness, readiness, and metrics
+endpoints over HTTP:
+
+| Endpoint | Check | Healthy response |
+| -------- | ----- | ---------------- |
+| `/healthz` | Online connectivity | `SERVING` |
+| `/livez` | No-op liveness check | `SERVING` |
+| `/readyz` | No-op readiness check | `SERVING` |
+| `/metrics` | Prometheus metrics | Metrics including `go_info` |
+
+> [!WARNING]
+> `/healthz` uses the shared online health registration, which checks external internet connectivity by default. In an offline environment, prefer `/livez` or `/readyz` for local process checks.
+
+Configure health check timing with:
 
 ```yaml
 health:
-  duration: 1s (how often to check)
-  timeout: 1s (when we should timeout the check)
+  duration: 1s
+  timeout: 1s
 ```
 
-## Deployment
+The repository's local configuration is in `test/.config/server.yml`.
 
-Since we are advocating building microservices, you would normally use a [container orchestration system](https://newrelic.com/blog/best-practices/container-orchestration-explained).
+## 🚢 Deployment
 
-## Development
+The service builds as a single binary and can also be built into a Docker image
+through the shared make targets. In production-like environments, run it behind
+your normal container orchestration and health-check configuration.
 
-If you would like to contribute, here is how you can get started.
+## 🛠️ Development
 
-### Structure
+### 🧱 Structure
 
-The project follows the structure in [golang-standards/project-layout](https://github.com/golang-standards/project-layout).
+The project follows the common Go service layout:
 
-### Dependencies
+| Path | Purpose |
+| ---- | ------- |
+| `main.go` | CLI bootstrap. |
+| `internal/cmd/` | Server command registration and module wiring. |
+| `internal/config/` | Application config layered on `github.com/alexfalkowski/go-service/v2/config`. |
+| `internal/api/v1/transport/http/` | HTTP route registration for `/v1/status/{code}`. |
+| `internal/health/` | Health registration and HTTP observers. |
+| `test/` | Ruby nonnative/cucumber integration tests and benchmark harness. |
 
-Please make sure that you have the following installed:
+### 📦 Dependencies
 
-- [Ruby](.ruby-version)
-- Golang
+Install these before running the full local workflow:
 
-### Style
+- Go `1.26.0`, as declared in `go.mod`.
+- Ruby and Bundler for the `test/` harness.
+- The `bin` submodule, initialized with `git submodule update --init`.
 
-This project favours the [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
+### 🧰 Commands
 
-### Setup
+Prefer the exposed `make` targets from the repository root:
 
-The get yourself setup, please run the following:
+| Command | Purpose |
+| ------- | ------- |
+| `make help` | Show available commands. |
+| `make dep` | Install Go and Ruby test dependencies. |
+| `make build` | Build the release binary named `status`. |
+| `make build-test` | Build the test binary with feature tags and coverage instrumentation. |
+| `make lint` | Lint Go and the Ruby test harness. |
+| `make specs` | Run Go tests with race and coverage reporting. |
+| `make features` | Run cucumber features against the local service. |
+| `make benchmarks` | Run cucumber benchmarks. |
+| `make coverage` | Generate HTML and function coverage reports. |
+| `make sec` | Run configured security checks. |
+| `make dev` | Run the server in watch mode with `air`. |
+
+> [!CAUTION]
+> Some shared git helper targets are intentionally destructive, including `make reset`, `make purge`, and branch deletion helpers. Use `make help` and inspect the target before running shared git workflow commands.
+
+### ✅ Validation
+
+The main CircleCI `build-service` job runs:
 
 ```sh
-make setup
-```
-
-### Binaries
-
-To make sure everything compiles for the app, please run the following:
-
-```sh
-make build-test
-```
-
-### Features
-
-To run all the features, please run the following:
-
-```sh
+make clean
+make dep
+make lint
+make sec
 make features
+make benchmarks
+make analyse
+make coverage
 ```
 
-### Changes
-
-To see what has changed, please have a look at `CHANGELOG.md`
+For a local documentation-only change, `make help` is a useful smoke check that
+the documented command surface is still available.
