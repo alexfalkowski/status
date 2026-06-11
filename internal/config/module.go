@@ -7,6 +7,7 @@ import (
 
 // Module for fx.
 var Module = di.Module(
+	di.Decorate(decorateValidator),
 	di.Constructor(config.NewConfig[Config]),
 	di.Decorate(decorateConfig),
 	di.Constructor(healthConfig),

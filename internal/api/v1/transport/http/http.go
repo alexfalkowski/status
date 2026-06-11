@@ -11,27 +11,38 @@ import (
 	"github.com/alexfalkowski/go-service/v2/net/http/status"
 	"github.com/alexfalkowski/go-service/v2/strings"
 	"github.com/alexfalkowski/go-service/v2/time"
+	"github.com/alexfalkowski/status/internal/config"
 )
 
 // ErrInvalidStatusCode is returned when the requested status code is unsupported.
 var ErrInvalidStatusCode = errors.New("status: invalid status code")
 
+// ErrInvalidSleepDuration is returned when the requested sleep duration is unsupported.
+var ErrInvalidSleepDuration = errors.New("status: invalid sleep duration")
+
 // Response for route.
 type Response any
 
 // Register for http.
-func Register() {
+func Register(cfg *config.Config) {
 	rest.Get("/v1/status/{code}", func(ctx context.Context) (*Response, error) {
 		req := meta.Request(ctx)
-		query := req.URL.Query()
 
-		if s := query.Get("sleep"); !strings.IsEmpty(s) {
-			t, err := time.ParseDuration(s)
+		code, err := parseStatusCode(req.PathValue("code"))
+		if err != nil {
+			return nil, status.SafeError(http.StatusBadRequest, err)
+		}
+
+		if s := req.URL.Query().Get("sleep"); !strings.IsEmpty(s) {
+			sleep, err := time.ParseDuration(s)
 			if err != nil {
 				return nil, status.SafeError(http.StatusBadRequest, err)
 			}
+			if sleep > cfg.GetMaxSleep() {
+				return nil, status.SafeError(http.StatusBadRequest, ErrInvalidSleepDuration)
+			}
 
-			timer := time.NewTimer(t)
+			timer := time.NewTimer(sleep)
 			defer timer.Stop()
 
 			select {
@@ -39,11 +50,6 @@ func Register() {
 				return nil, status.SafeError(http.StatusRequestTimeout, ctx.Err())
 			case <-timer.C:
 			}
-		}
-
-		code, err := parseStatusCode(req.PathValue("code"))
-		if err != nil {
-			return nil, status.SafeError(http.StatusBadRequest, err)
 		}
 
 		return nil, status.Errorf(code, "%d %s", code, http.StatusText(code))

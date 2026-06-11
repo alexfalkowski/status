@@ -70,7 +70,7 @@ GET /v1/status/{code}?sleep=50ms
 | Parameter | Location | Required | Description |
 | --------- | -------- | -------- | ----------- |
 | `code` | Path | Yes | Status code to return. Named codes include their standard reason phrase, such as `200 OK`. |
-| `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. |
+| `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. Must be less than or equal to the effective `max_sleep`. |
 
 > [!CAUTION]
 > `sleep` intentionally delays the response. Keep durations short in tests so client timeouts and CI jobs do not wait longer than expected.
@@ -90,6 +90,14 @@ For codes without a standard reason phrase, the body contains the numeric code:
 ```
 
 Invalid status codes or invalid `sleep` values return `400 Bad Request`.
+
+The maximum accepted sleep duration defaults to `5m`. Configure a lower maximum with:
+
+```yaml
+max_sleep: 2m
+```
+
+When set, `max_sleep` must be greater than `0` and less than or equal to `5m`.
 
 ## 💓 Health
 
