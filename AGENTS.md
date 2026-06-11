@@ -59,8 +59,8 @@ Useful direct run while debugging:
 - Ruby test harness dependencies live in `test/Gemfile`.
 - `test/nonnative.yml` expects the service on `http://localhost:11000`.
 - Test and coverage artifacts are written under `test/reports/`.
-- The `/v1/status/{code}` handler also accepts `sleep=<duration>` and parses
-  it with `time.ParseDuration`.
+- The `/v1/status/{code}` handler also accepts `sleep=<duration>`, parses it
+  with `time.ParseDuration`, and rejects values above the effective `maxSleep`.
 
 ## Intentional design choices
 

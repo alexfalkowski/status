@@ -35,3 +35,7 @@ end
 Then('I should receive the response in at least {int} ms') do |time|
   expect(@elapsed * 1000).to be >= time
 end
+
+Then('I should receive the response in less than {int} ms') do |time|
+  expect(@elapsed * 1000).to be < time
+end
