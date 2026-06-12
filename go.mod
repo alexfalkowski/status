@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/alexfalkowski/go-health/v2 v2.28.0
-	github.com/alexfalkowski/go-service/v2 v2.578.0
+	github.com/alexfalkowski/go-service/v2 v2.581.0
 	github.com/go-playground/validator/v10 v10.30.3
 )
 
