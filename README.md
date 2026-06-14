@@ -99,8 +99,10 @@ For codes without a standard reason phrase, the body contains the numeric code:
 
 Invalid status codes, unparsable `sleep` values, and sleeps above the effective
 `max_sleep` return `400 Bad Request`. A `sleep` accepted by `max_sleep` can
-still exceed the configured HTTP request or client timeout; in that case the
-request may time out or close before the requested status response is returned.
+still exceed the configured HTTP request timeout. When the request context is
+canceled while waiting for an accepted sleep, the service returns
+`408 Request Timeout`. A shorter client-side timeout can still close the request
+before a response is observed.
 
 The maximum accepted sleep duration defaults to `5m`. Configure a lower maximum with:
 
