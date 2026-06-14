@@ -30,15 +30,18 @@ git submodule update --init
 make dep
 ```
 
+The configured `bin` submodule URL uses GitHub SSH. Configure GitHub SSH access
+first, or override the submodule URL to HTTPS before initializing it.
+
 Build and run the service with the local test configuration:
 
 ```sh
 make build
-./status server -i file:test/.config/server.yml
+./status server -config file:test/.config/server.yml
 ```
 
-The local configuration binds the HTTP server to `localhost:11000`, so you can
-try it with:
+The local configuration listens on `tcp://:11000`, which binds port `11000` on
+all interfaces. For local requests, use:
 
 ```sh
 curl -i http://localhost:11000/v1/status/200
@@ -70,10 +73,10 @@ GET /v1/status/{code}?sleep=50ms
 | Parameter | Location | Required | Description |
 | --------- | -------- | -------- | ----------- |
 | `code` | Path | Yes | Status code to return. Named codes include their standard reason phrase, such as `200 OK`. |
-| `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. Must be less than or equal to the effective `max_sleep`. |
+| `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. Must be less than or equal to the effective `max_sleep` and short enough for the configured HTTP request timeout. |
 
 > [!CAUTION]
-> `sleep` intentionally delays the response. Keep durations short in tests so client timeouts and CI jobs do not wait longer than expected.
+> `sleep` intentionally delays the response. Keep durations short in tests so client timeouts and CI jobs do not wait longer than expected. The checked-in local configuration sets the HTTP timeout to `5s`.
 
 #### 📤 Response
 
@@ -97,7 +100,8 @@ The maximum accepted sleep duration defaults to `5m`. Configure a lower maximum 
 max_sleep: 2m
 ```
 
-When set, `max_sleep` must be greater than `0` and less than or equal to `5m`.
+Omitting `max_sleep` or setting it to `0` uses the `5m` default. Positive
+configured values must be less than or equal to `5m`.
 
 ## 💓 Health
 
@@ -151,7 +155,8 @@ Install these before running the full local workflow:
 
 - Go `1.26.0`, as declared in `go.mod`.
 - Ruby and Bundler for the `test/` harness.
-- The `bin` submodule, initialized with `git submodule update --init`.
+- The `bin` submodule, initialized with `git submodule update --init`. The
+  configured submodule URL uses GitHub SSH unless you override it locally.
 
 ### 🧰 Commands
 
