@@ -50,7 +50,7 @@ From the repo root, prefer the exposed `make` targets:
 Useful direct run while debugging:
 
 ```sh
-./status server -i file:test/.config/server.yml
+./status server -config file:test/.config/server.yml
 ```
 
 ## Runtime and test notes
@@ -58,9 +58,12 @@ Useful direct run while debugging:
 - Go version is `1.26.0` in `go.mod`.
 - Ruby test harness dependencies live in `test/Gemfile`.
 - `test/nonnative.yml` expects the service on `http://localhost:11000`.
+- `test/.config/server.yml` listens on `tcp://:11000`, which binds port `11000`
+  on all interfaces; use `http://localhost:11000` for local client requests.
 - Test and coverage artifacts are written under `test/reports/`.
 - The `/v1/status/{code}` handler also accepts `sleep=<duration>`, parses it
   with `time.ParseDuration`, and rejects values above the effective `maxSleep`.
+  Longer sleeps can still exceed the configured HTTP request timeout.
 
 ## Intentional design choices
 
@@ -90,6 +93,8 @@ The main `build-service` job runs:
 - The root `Makefile` depends on the `bin` submodule and includes:
   `bin/build/make/help.mak`, `bin/build/make/http.mak`, and
   `bin/build/make/git.mak`.
+- The configured `bin` submodule URL uses GitHub SSH; fresh checkouts need
+  GitHub SSH access or a local HTTPS submodule URL override.
 - Shared git helper targets are exposed here too; some are destructive
   (`make reset`, `make purge`, branch deletion helpers, force-push helpers).
   Do not use them unless the user explicitly asks.
