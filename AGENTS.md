@@ -12,8 +12,8 @@ matching skill for the task.
 testing.
 
 - `GET /v1/status/{code}` returns the requested status code.
-- Health endpoints are exposed via the shared health module:
-  `/healthz`, `/livez`, and `/readyz`.
+- Health endpoints are exposed via the shared health module under the service
+  name prefix: `/status/healthz`, `/status/livez`, and `/status/readyz`.
 - The binary entrypoint is `status server`.
 
 ## Entry points and layout
@@ -60,14 +60,16 @@ Useful direct run while debugging:
 - `test/nonnative.yml` expects the service on `http://localhost:11000`.
 - `test/.config/server.yml` listens on `tcp://:11000`, which binds port `11000`
   on all interfaces; use `http://localhost:11000` for local client requests.
+  Operation endpoints use the `status` service prefix, for example
+  `http://localhost:11000/status/healthz`.
 - Test and coverage artifacts are written under `test/reports/`.
 - The `/v1/status/{code}` handler also accepts `sleep=<duration>`, parses it
-  with `time.ParseDuration`, and rejects values above the effective `maxSleep`.
+  with `time.ParseDuration`, and rejects values above the effective `max_sleep`.
   Longer sleeps can still exceed the configured HTTP request timeout.
 
 ## Intentional design choices
 
-- `/healthz` is intentionally wired to the shared health module's online
+- `/status/healthz` is intentionally wired to the shared health module's online
   registration, which checks external internet connectivity by default. This is
   expected for this service; do not flag the external egress dependency as an
   issue unless the task is specifically about changing health semantics.

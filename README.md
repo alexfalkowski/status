@@ -46,6 +46,7 @@ all interfaces. For local requests, use:
 ```sh
 curl -i http://localhost:11000/v1/status/200
 curl -i "http://localhost:11000/v1/status/503?sleep=50ms"
+curl -i http://localhost:11000/status/healthz
 ```
 
 > [!IMPORTANT]
@@ -76,15 +77,19 @@ GET /v1/status/{code}?sleep=50ms
 | `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. Must be less than or equal to the effective `max_sleep` and short enough for the configured HTTP request timeout. |
 
 > [!CAUTION]
-> `sleep` intentionally delays the response. Keep durations short in tests so client timeouts and CI jobs do not wait longer than expected. The checked-in local configuration sets the HTTP timeout to `5s`.
+> `sleep` intentionally delays the response. Keep durations short in tests so client timeouts and CI jobs do not wait longer than expected. The checked-in local configuration sets `max_sleep` to `2m` and the HTTP timeout to `5s`, so some accepted sleeps can still outlast the transport timeout.
 
 #### 📤 Response
 
-The response status is the requested code and the body is plain text:
+The response status is the requested code. When HTTP permits a response body,
+the body is plain text:
 
 ```http
 200 OK
 ```
+
+Status codes that do not permit a response body, such as `204 No Content` and
+`304 Not Modified`, return no body.
 
 For codes without a standard reason phrase, the body contains the numeric code:
 
@@ -92,7 +97,10 @@ For codes without a standard reason phrase, the body contains the numeric code:
 999
 ```
 
-Invalid status codes or invalid `sleep` values return `400 Bad Request`.
+Invalid status codes, unparsable `sleep` values, and sleeps above the effective
+`max_sleep` return `400 Bad Request`. A `sleep` accepted by `max_sleep` can
+still exceed the configured HTTP request or client timeout; in that case the
+request may time out or close before the requested status response is returned.
 
 The maximum accepted sleep duration defaults to `5m`. Configure a lower maximum with:
 
@@ -105,18 +113,18 @@ configured values must be less than or equal to `5m`.
 
 ## 💓 Health
 
-The shared health module exposes health, liveness, readiness, and metrics
-endpoints over HTTP:
+The shared health module exposes service-prefixed health, liveness, readiness,
+and metrics endpoints over HTTP. With the local `status` service name, use:
 
 | Endpoint | Check | Healthy response |
 | -------- | ----- | ---------------- |
-| `/healthz` | Online connectivity | `SERVING` |
-| `/livez` | No-op liveness check | `SERVING` |
-| `/readyz` | No-op readiness check | `SERVING` |
-| `/metrics` | Prometheus metrics | Metrics including `go_info` |
+| `/status/healthz` | Online connectivity | `SERVING` |
+| `/status/livez` | No-op liveness check | `SERVING` |
+| `/status/readyz` | No-op readiness check | `SERVING` |
+| `/status/metrics` | Prometheus metrics | Metrics including `go_info` |
 
 > [!WARNING]
-> `/healthz` uses the shared online health registration, which checks external internet connectivity by default. In an offline environment, prefer `/livez` or `/readyz` for local process checks.
+> `/status/healthz` uses the shared online health registration, which checks external internet connectivity by default. In an offline environment, prefer `/status/livez` or `/status/readyz` for local process checks.
 
 Configure health check timing with:
 
@@ -170,14 +178,18 @@ Prefer the exposed `make` targets from the repository root:
 | `make build-test` | Build the test binary with feature tags and coverage instrumentation. |
 | `make lint` | Lint Go and the Ruby test harness. |
 | `make specs` | Run Go tests with race and coverage reporting. |
-| `make features` | Run cucumber features against the local service. |
-| `make benchmarks` | Run cucumber benchmarks. |
+| `make features` | Build the feature test binary and run cucumber features; Nonnative starts the service on port `11000`. |
+| `make benchmarks` | Build the release binary and run cucumber benchmarks; Nonnative starts the service on port `11000`. |
 | `make coverage` | Generate HTML and function coverage reports. |
 | `make sec` | Run configured security checks. |
 | `make dev` | Run the server in watch mode with `air`. |
 
 > [!CAUTION]
 > Some shared git helper targets are intentionally destructive, including `make reset`, `make purge`, and branch deletion helpers. Use `make help` and inspect the target before running shared git workflow commands.
+
+Stop any manually started server before running `make features` or
+`make benchmarks`; both targets expect port `11000` to be free for the
+Nonnative-managed service process.
 
 ### ✅ Validation
 
