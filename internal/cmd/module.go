@@ -8,7 +8,7 @@ import (
 	"github.com/alexfalkowski/status/internal/health"
 )
 
-// Module for fx.
+// Module composes the server command with service config, health, and v1 API wiring.
 var Module = di.Module(
 	module.Server,
 	config.Module,

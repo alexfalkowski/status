@@ -4,7 +4,8 @@ import "github.com/alexfalkowski/go-service/v2/time"
 
 // Config configures the health subsystem.
 //
-// Both fields are parsed as durations (for example: "250ms", "5s", "1m").
+// Both fields are required, must be positive, and are parsed as durations (for
+// example: "250ms", "5s", "1m").
 //
 // The values are used by the health module when registering checks and
 // observers:

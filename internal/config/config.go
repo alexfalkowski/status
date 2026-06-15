@@ -11,7 +11,11 @@ import (
 // MaxSleepLimit is the largest configured status response delay.
 const MaxSleepLimit = 5 * time.Minute
 
-// Config for the service.
+// Config is the service configuration loaded by the server command.
+//
+// Health and the embedded shared service config are required. MaxSleep is
+// optional; zero falls back to MaxSleepLimit, and positive values must not
+// exceed MaxSleepLimit.
 type Config struct {
 	Health         *health.Config `yaml:"health,omitempty" json:"health,omitempty" toml:"health,omitempty" validate:"required"`
 	*config.Config `yaml:",inline" json:",inline" toml:",inline" validate:"required"`
