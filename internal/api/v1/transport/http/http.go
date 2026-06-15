@@ -20,10 +20,15 @@ var ErrInvalidStatusCode = errors.New("status: invalid status code")
 // ErrInvalidSleepDuration is returned when the requested sleep duration is unsupported.
 var ErrInvalidSleepDuration = errors.New("status: invalid sleep duration")
 
-// Response for route.
+// Response marks the status route response type for the shared REST transport.
 type Response any
 
-// Register for http.
+// Register adds GET /v1/status/{code} to the shared REST router.
+//
+// The route accepts status codes from 200 through 999. The optional sleep query
+// parameter is parsed as a duration, rejected when it exceeds the configured
+// maximum, and returns 408 Request Timeout when the request context is canceled
+// while waiting.
 func Register(cfg *config.Config) {
 	rest.Get("/v1/status/{code}", func(ctx context.Context) (*Response, error) {
 		req := meta.Request(ctx)

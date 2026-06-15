@@ -46,7 +46,7 @@ all interfaces. For local requests, use:
 ```sh
 curl -i http://localhost:11000/v1/status/200
 curl -i "http://localhost:11000/v1/status/503?sleep=50ms"
-curl -i http://localhost:11000/status/healthz
+curl -i http://localhost:11000/status/livez
 ```
 
 > [!IMPORTANT]
@@ -74,7 +74,7 @@ GET /v1/status/{code}?sleep=50ms
 | Parameter | Location | Required | Description |
 | --------- | -------- | -------- | ----------- |
 | `code` | Path | Yes | Status code to return. Named codes include their standard reason phrase, such as `200 OK`. |
-| `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. Must be less than or equal to the effective `max_sleep` and short enough for the configured HTTP request timeout. |
+| `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. Must be less than or equal to the effective `max_sleep` and short enough for the configured HTTP request timeout. Parsed durations at or below `0` are accepted and return without waiting. |
 
 > [!CAUTION]
 > `sleep` intentionally delays the response. Keep durations short in tests so client timeouts and CI jobs do not wait longer than expected. The checked-in local configuration sets `max_sleep` to `2m` and the HTTP timeout to `5s`, so some accepted sleeps can still outlast the transport timeout.
@@ -115,8 +115,10 @@ configured values must be less than or equal to `5m`.
 
 ## 💓 Health
 
-The shared health module exposes service-prefixed health, liveness, readiness,
-and metrics endpoints over HTTP. With the local `status` service name, use:
+The shared health module exposes service-prefixed health, liveness, and
+readiness endpoints over HTTP. The shared telemetry configuration exposes
+service-prefixed Prometheus metrics when `telemetry.metrics.kind` is
+`prometheus`. With the local `status` service name, use:
 
 | Endpoint | Check | Healthy response |
 | -------- | ----- | ---------------- |
@@ -136,13 +138,18 @@ health:
   timeout: 1s
 ```
 
+The `health` block is required. Both durations must be positive values.
+
 The repository's local configuration is in `test/.config/server.yml`.
 
 ## 🚢 Deployment
 
-The service builds as a single binary and can also be built into a Docker image
-through the shared make targets. In production-like environments, run it behind
-your normal container orchestration and health-check configuration.
+The service builds as a single binary and CI publishes the multi-architecture
+Docker image as `alexfalkowski/status`. The shared Docker make targets build
+platform-specific images for `amd64` and `arm64`; production push and manifest
+targets no-op unless the release version file is present. In production-like
+environments, run the image behind your normal container orchestration and
+health-check configuration.
 
 ## 🛠️ Development
 
@@ -158,6 +165,9 @@ The project follows the common Go service layout:
 | `internal/api/v1/transport/http/` | HTTP route registration for `/v1/status/{code}`. |
 | `internal/health/` | Health registration and HTTP observers. |
 | `test/` | Ruby nonnative/cucumber integration tests and benchmark harness. |
+
+See `test/README.md` for the Cucumber/Nonnative harness contract, benchmark
+thresholds, direct-run caveats, and generated report locations.
 
 ### 📦 Dependencies
 

@@ -5,7 +5,7 @@ import (
 	"github.com/alexfalkowski/status/internal/api/v1/transport/http"
 )
 
-// Module for fx.
+// Module registers the v1 HTTP API routes.
 var Module = di.Module(
 	di.Register(http.Register),
 )
