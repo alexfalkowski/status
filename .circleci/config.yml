@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build-service:
     docker:
-      - image: alexfalkowski/go:4.18
+      - image: alexfalkowski/go:4.19
     working_directory: ~/status
     steps:
       - checkout:
@@ -106,13 +106,13 @@ jobs:
     resource_class: arm.large
   wait-all:
     docker:
-      - image: alexfalkowski/go:4.18
+      - image: alexfalkowski/go:4.19
     steps:
       - run: echo "all applicable jobs finished"
     resource_class: arm.large
   test-docker-amd64:
     docker:
-      - image: alexfalkowski/go:4.18
+      - image: alexfalkowski/go:4.19
     working_directory: ~/status
     steps:
       - checkout:
@@ -125,7 +125,7 @@ jobs:
     resource_class: large
   test-docker-arm64:
     docker:
-      - image: alexfalkowski/go:4.18
+      - image: alexfalkowski/go:4.19
     working_directory: ~/status
     steps:
       - checkout:
@@ -138,7 +138,7 @@ jobs:
     resource_class: arm.large
   release-docker-amd64:
     docker:
-      - image: alexfalkowski/go:4.18
+      - image: alexfalkowski/go:4.19
     working_directory: ~/status
     steps:
       - checkout:
@@ -156,7 +156,7 @@ jobs:
     resource_class: large
   release-docker-arm64:
     docker:
-      - image: alexfalkowski/go:4.18
+      - image: alexfalkowski/go:4.19
     working_directory: ~/status
     steps:
       - checkout:
@@ -174,7 +174,7 @@ jobs:
     resource_class: arm.large
   manifest-docker:
     docker:
-      - image: alexfalkowski/go:4.18
+      - image: alexfalkowski/go:4.19
     working_directory: ~/status
     steps:
       - checkout:
