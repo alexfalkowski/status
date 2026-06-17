@@ -5,7 +5,6 @@ import (
 	"github.com/alexfalkowski/go-service/v2/runtime"
 	"github.com/alexfalkowski/go-service/v2/time"
 	"github.com/alexfalkowski/status/internal/health"
-	"github.com/go-playground/validator/v10"
 )
 
 // MaxSleepLimit is the largest configured status response delay.
@@ -44,7 +43,7 @@ func decorateValidator(v *config.Validator) *config.Validator {
 	return v
 }
 
-func validateMaxSleep(fl validator.FieldLevel) bool {
+func validateMaxSleep(fl config.FieldLevel) bool {
 	maxSleep := time.Duration(fl.Field().Int())
 	return maxSleep == 0 || (maxSleep > 0 && maxSleep <= MaxSleepLimit)
 }

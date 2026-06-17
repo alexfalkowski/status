@@ -4,8 +4,7 @@ go 1.26.0
 
 require (
 	github.com/alexfalkowski/go-health/v2 v2.29.0
-	github.com/alexfalkowski/go-service/v2 v2.591.0
-	github.com/go-playground/validator/v10 v10.30.3
+	github.com/alexfalkowski/go-service/v2 v2.593.0
 )
 
 require (
@@ -41,6 +40,7 @@ require (
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
+	github.com/go-playground/validator/v10 v10.30.3 // indirect
 	github.com/go-sprout/sprout v1.0.3 // indirect
 	github.com/go-sql-driver/mysql v1.10.0 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
