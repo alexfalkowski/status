@@ -78,12 +78,26 @@ Useful direct run while debugging:
   shared `bin` Make fragments rather than as a service-local target here. Do not
   flag the lack of a root `verify` or `ci-checks` target as a feature gap by
   default.
+- CircleCI's `version` job runs the external `package` command from the
+  `alexfalkowski/release` image. That release tooling owns GoReleaser config
+  validation before publishing. Do not flag the absence of a separate
+  repository-local GoReleaser config validation job as a project gap by default
+  unless there is concrete evidence that the release image no longer validates
+  `.goreleaser.yml`, or this repository has explicitly decided to own a
+  pre-release GoReleaser check locally.
 - The Ruby code under `test/` is a local feature-test harness, not production
   service code. Fixed localhost endpoints in `test/lib/**`, `test/nonnative.yml`,
   and related feature helpers are intentional local harness assumptions unless
   there is concrete evidence of current workflow breakage. Do not flag the lack
   of environment-configurable HTTP or observability endpoints as a feature gap
   by default.
+- Ruby runtime selection for the `test/` harness is owned by the external
+  service CI image and shared Ruby Make wiring, not by production service code.
+  Do not flag the absence of a repository-local `.ruby-version`,
+  `.tool-versions`, `mise.toml`, or Gemfile `ruby` directive as a project gap by
+  default unless there is concrete evidence that CI no longer supplies the
+  expected runtime, or this repository has explicitly decided to own Ruby version
+  selection locally for the test harness.
 
 ## CI signal
 
