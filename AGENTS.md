@@ -69,6 +69,12 @@ Useful direct run while debugging:
 
 ## Intentional design choices
 
+- This service intentionally simulates HTTP errors and response delays for tests.
+  The `/v1/status/{code}?sleep=<duration>` path may accept sleeps longer than
+  the configured HTTP request timeout when the value is within `max_sleep`. Do
+  not flag that mismatch as a reliability gap by default; it is expected
+  test-fixture behavior unless the task is specifically about changing delay
+  semantics or there is concrete evidence of current workflow breakage.
 - `/status/healthz` is intentionally wired to the shared health module's online
   registration, which checks external internet connectivity by default. This is
   expected for this service; do not flag the external egress dependency as an
@@ -85,6 +91,12 @@ Useful direct run while debugging:
   unless there is concrete evidence that the release image no longer validates
   `.goreleaser.yml`, or this repository has explicitly decided to own a
   pre-release GoReleaser check locally.
+- Docker images for this service are released and deployed frequently, so a
+  separate repository-local container runtime smoke gate before Docker image
+  publication is not required by default. Do not flag the absence of a
+  pre-publish Docker `docker run`/health endpoint smoke check as a reliability
+  or project gap unless there is concrete evidence of current release breakage,
+  or this repository has explicitly decided to own that gate locally.
 - The Ruby code under `test/` is a local feature-test harness, not production
   service code. Fixed localhost endpoints in `test/lib/**`, `test/nonnative.yml`,
   and related feature helpers are intentional local harness assumptions unless
