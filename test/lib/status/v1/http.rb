@@ -1,18 +1,15 @@
 # frozen_string_literal: true
 
-require 'securerandom'
-
 module Status
   module V1
     class HTTP < Nonnative::HTTPClient
       def options
-        {
+        Status.http_options(
           headers: {
-            request_id: SecureRandom.uuid, user_agent: 'Status-ruby-client/1.0 HTTP/1.0',
+            user_agent: 'Status-ruby-client/1.0 HTTP/1.0',
             content_type: :json, accept: :json
-          },
-          read_timeout: 10, open_timeout: 10
-        }
+          }
+        )
       end
 
       def code(code, sleep = '', opts = {})
