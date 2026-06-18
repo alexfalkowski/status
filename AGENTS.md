@@ -73,6 +73,17 @@ Useful direct run while debugging:
   registration, which checks external internet connectivity by default. This is
   expected for this service; do not flag the external egress dependency as an
   issue unless the task is specifically about changing health semantics.
+- This repository consumes shared Make targets from the `bin/` submodule. If a
+  one-command local CI preflight target is needed, it should be added to the
+  shared `bin` Make fragments rather than as a service-local target here. Do not
+  flag the lack of a root `verify` or `ci-checks` target as a feature gap by
+  default.
+- The Ruby code under `test/` is a local feature-test harness, not production
+  service code. Fixed localhost endpoints in `test/lib/**`, `test/nonnative.yml`,
+  and related feature helpers are intentional local harness assumptions unless
+  there is concrete evidence of current workflow breakage. Do not flag the lack
+  of environment-configurable HTTP or observability endpoints as a feature gap
+  by default.
 
 ## CI signal
 
