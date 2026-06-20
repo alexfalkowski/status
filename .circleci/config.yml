@@ -1,15 +1,33 @@
 version: 2.1
 
-jobs:
-  build-service:
-    docker:
-      - image: alexfalkowski/go:4.20
-    working_directory: ~/status
+commands:
+  sync-submodules:
+    steps:
+      - run: git submodule sync
+      - run: git submodule update --init
+  checkout-submodules:
     steps:
       - checkout:
           method: blobless
-      - run: git submodule sync
-      - run: git submodule update --init
+      - sync-submodules
+
+executors:
+  go:
+    docker:
+      - image: alexfalkowski/go:4.20
+  release:
+    docker:
+      - image: alexfalkowski/release:8.18
+  alpine:
+    docker:
+      - image: alpine:latest
+
+jobs:
+  build-service:
+    executor: go
+    working_directory: ~/status
+    steps:
+      - checkout-submodules
       - run: make source-key
       - restore_cache:
           name: restore go cache
@@ -67,25 +85,17 @@ jobs:
       - run: make codecov-upload
     resource_class: arm.large
   sync:
-    docker:
-      - image: alexfalkowski/release:8.18
+    executor: release
     working_directory: ~/status
     steps:
-      - checkout:
-          method: blobless
-      - run: git submodule sync
-      - run: git submodule update --init
+      - checkout-submodules
       - run: make sync push
     resource_class: arm.large
   version:
-    docker:
-      - image: alexfalkowski/release:8.18
+    executor: release
     working_directory: ~/status
     steps:
-      - checkout:
-          method: blobless
-      - run: git submodule sync
-      - run: git submodule update --init
+      - checkout-submodules
       - run: make source-key
       - restore_cache:
           name: restore go cache
@@ -105,46 +115,33 @@ jobs:
       - run: package
     resource_class: arm.large
   wait-all:
-    docker:
-      - image: alpine:latest
+    executor: alpine
     resource_class: small
     steps:
       - run: echo "all applicable jobs finished"
   test-docker-amd64:
-    docker:
-      - image: alexfalkowski/go:4.20
+    executor: go
     working_directory: ~/status
     steps:
-      - checkout:
-          method: blobless
-      - run: git submodule sync
-      - run: git submodule update --init
+      - checkout-submodules
       - setup_remote_docker:
           docker_layer_caching: true
       - run: make platform=amd64 test-docker
     resource_class: large
   test-docker-arm64:
-    docker:
-      - image: alexfalkowski/go:4.20
+    executor: go
     working_directory: ~/status
     steps:
-      - checkout:
-          method: blobless
-      - run: git submodule sync
-      - run: git submodule update --init
+      - checkout-submodules
       - setup_remote_docker:
           docker_layer_caching: true
       - run: make platform=arm64 test-docker
     resource_class: arm.large
   release-docker-amd64:
-    docker:
-      - image: alexfalkowski/go:4.20
+    executor: go
     working_directory: ~/status
     steps:
-      - checkout:
-          method: blobless
-      - run: git submodule sync
-      - run: git submodule update --init
+      - checkout-submodules
       - attach_workspace:
           at: /tmp/workspace
       - setup_remote_docker:
@@ -155,14 +152,10 @@ jobs:
       - run: make platform=amd64 release-docker
     resource_class: large
   release-docker-arm64:
-    docker:
-      - image: alexfalkowski/go:4.20
+    executor: go
     working_directory: ~/status
     steps:
-      - checkout:
-          method: blobless
-      - run: git submodule sync
-      - run: git submodule update --init
+      - checkout-submodules
       - attach_workspace:
           at: /tmp/workspace
       - setup_remote_docker:
@@ -173,14 +166,10 @@ jobs:
       - run: make platform=arm64 release-docker
     resource_class: arm.large
   manifest-docker:
-    docker:
-      - image: alexfalkowski/go:4.20
+    executor: go
     working_directory: ~/status
     steps:
-      - checkout:
-          method: blobless
-      - run: git submodule sync
-      - run: git submodule update --init
+      - checkout-submodules
       - attach_workspace:
           at: /tmp/workspace
       - setup_remote_docker:
