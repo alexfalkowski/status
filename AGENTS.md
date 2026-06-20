@@ -106,6 +106,10 @@ Useful direct run while debugging:
   pre-publish Docker `docker run`/health endpoint smoke check as a reliability
   or project gap unless there is concrete evidence of current release breakage,
   or this repository has explicitly decided to own that gate locally.
+- Docker image validation jobs intentionally run on non-master branches and are
+  not required again before the master `version`/`package` release step. Do not
+  flag the lack of master-branch `test-docker-*` gating before release writes
+  as a project workflow gap by default.
 - The Ruby code under `test/` is a local feature-test harness, not production
   service code. Fixed localhost endpoints in `test/lib/**`, `test/nonnative.yml`,
   and related feature helpers are intentional local harness assumptions unless
@@ -117,6 +121,10 @@ Useful direct run while debugging:
   before delegating into `test/`. Direct `make -C test features` and
   `make -C test benchmarks` are not the default workflow. Do not flag the lack
   of a direct `test/` binary preflight as a project gap by default.
+- Feature and benchmark Cucumber runs intentionally share the configured HTML
+  report path in `test/.config/cucumber.yml`. Treat the JUnit XML reports and
+  coverage files as the durable CI artifacts; do not flag the lack of separate
+  feature and benchmark HTML report paths as a project workflow gap by default.
 - Ruby runtime selection for the `test/` harness is owned by the external
   service CI image and shared Ruby Make wiring, not by production service code.
   Do not flag the absence of a repository-local `.ruby-version`,
