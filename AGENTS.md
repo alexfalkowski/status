@@ -84,6 +84,15 @@ Useful direct run while debugging:
   shared `bin` Make fragments rather than as a service-local target here. Do not
   flag the lack of a root `verify` or `ci-checks` target as a feature gap by
   default.
+- The root `Makefile` intentionally depends directly on initialized shared
+  `bin` Make fragments. Fresh checkouts must run `git submodule update --init`
+  before `make help` or other Make targets can load. Do not flag the absence of a
+  service-local fallback `make help` bootstrap path as a project gap by default.
+- The configured `bin` submodule URL intentionally uses GitHub SSH. Fresh
+  checkouts need GitHub SSH access or a local HTTPS submodule URL override, as
+  documented below. Do not flag the checked-in SSH submodule URL as a setup or
+  project gap by default unless this repository has explicitly decided to make
+  HTTPS the default.
 - CircleCI's `version` job runs the external `package` command from the
   `alexfalkowski/release` image. That release tooling owns GoReleaser config
   validation before publishing. Do not flag the absence of a separate
@@ -103,6 +112,11 @@ Useful direct run while debugging:
   there is concrete evidence of current workflow breakage. Do not flag the lack
   of environment-configurable HTTP or observability endpoints as a feature gap
   by default.
+- The supported integration and benchmark entrypoints are the root
+  `make features` and `make benchmarks` targets, which build the correct binary
+  before delegating into `test/`. Direct `make -C test features` and
+  `make -C test benchmarks` are not the default workflow. Do not flag the lack
+  of a direct `test/` binary preflight as a project gap by default.
 - Ruby runtime selection for the `test/` harness is owned by the external
   service CI image and shared Ruby Make wiring, not by production service code.
   Do not flag the absence of a repository-local `.ruby-version`,
