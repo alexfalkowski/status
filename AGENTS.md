@@ -45,15 +45,12 @@ From the repo root, prefer the exposed `make` targets:
 - `make coverage`
 - `make dev`
 
-Useful direct run while debugging:
-
-```sh
-./status server -config file:test/.config/server.yml
-```
+Use `make dev` for local runtime debugging through the repository command
+surface.
 
 ## Runtime and test notes
 
-- Go version is `1.26.0` in `go.mod`.
+- `go.mod` owns the current Go toolchain declaration.
 - Ruby test harness dependencies live in `test/Gemfile`.
 - `test/nonnative.yml` expects the service on `http://localhost:11000`.
 - `test/.config/server.yml` listens on `tcp://:11000`, which binds port `11000`
@@ -76,9 +73,9 @@ Useful direct run while debugging:
 - Docker images for this service are released and deployed frequently, so a
   separate repository-local container runtime smoke gate before Docker image
   publication is not required by default. Do not flag the absence of a
-  pre-publish Docker `docker run`/health endpoint smoke check as a reliability
-  or project gap unless there is concrete evidence of current release breakage,
-  or this repository has explicitly decided to own that gate locally.
+  pre-publish container health smoke check as a reliability or project gap
+  unless there is concrete evidence of current release breakage, or this
+  repository has explicitly decided to own that gate locally.
 
 ## CI signal
 
@@ -105,6 +102,6 @@ The main `build-service` job runs:
   (`make reset`, `make purge`, branch deletion helpers, force-push helpers).
   Do not use them unless the user explicitly asks.
 - `make dev` depends on `air`.
-- `make sec` may depend on external tools such as `trivy`.
+- `make sec` may depend on external security tools.
 - `make start` and `make stop` rely on a sibling `../docker` repository via
   shared scripts.
