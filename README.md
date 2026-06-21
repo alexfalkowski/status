@@ -189,7 +189,7 @@ Prefer the exposed `make` targets from the repository root:
 | `make build` | Build the release binary named `status`. |
 | `make build-test` | Build the test binary with feature tags and coverage instrumentation. |
 | `make lint` | Lint Go and the Ruby test harness. |
-| `make specs` | Run Go tests with race and coverage reporting. |
+| `make specs` | Run focused Go tests with race and coverage reporting; the main CircleCI job does not run this as a separate step. |
 | `make features` | Build the feature test binary and run cucumber features; Nonnative starts the service on port `11000`. |
 | `make benchmarks` | Build the release binary and run cucumber benchmarks; Nonnative starts the service on port `11000`. |
 | `make coverage` | Generate HTML and function coverage reports. |
