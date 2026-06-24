@@ -22,6 +22,10 @@ module Status
       def code_with_location(code, location, opts = {})
         get("v1/status/#{code}?location=#{location}", opts.merge(max_redirects: 0))
       end
+
+      def code_with_retry_after(code, retry_after, opts = {})
+        get("v1/status/#{code}?retry_after=#{retry_after}", opts)
+      end
     end
   end
 end
