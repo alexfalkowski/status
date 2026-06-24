@@ -46,6 +46,7 @@ all interfaces. For local requests, use:
 ```sh
 curl -i http://localhost:11000/v1/status/200
 curl -i "http://localhost:11000/v1/status/503?sleep=50ms"
+curl -i "http://localhost:11000/v1/status/302?location=/redirected"
 curl -i http://localhost:11000/status/livez
 ```
 
@@ -66,6 +67,7 @@ Returns the requested HTTP status code.
 ```http
 GET /v1/status/{code}
 GET /v1/status/{code}?sleep=50ms
+GET /v1/status/{code}?location=/redirected
 ```
 
 > [!NOTE]
@@ -75,6 +77,7 @@ GET /v1/status/{code}?sleep=50ms
 | --------- | -------- | -------- | ----------- |
 | `code` | Path | Yes | Status code to return. Named codes include their standard reason phrase, such as `200 OK`. |
 | `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. Must be less than or equal to the effective `max_sleep` and short enough for the configured HTTP request timeout. Parsed durations at or below `0` are accepted and return without waiting. |
+| `location` | Query | No | Redirect target to return in the `Location` header. Only valid for `300` through `399` responses. URL-encode values that contain query delimiters or other reserved characters. |
 
 > [!CAUTION]
 > `sleep` intentionally delays the response. Keep durations short in tests so client timeouts and CI jobs do not wait longer than expected. The checked-in local configuration sets `max_sleep` to `2m` and the HTTP timeout to `5s`, so some accepted sleeps can still outlast the transport timeout.
@@ -97,12 +100,13 @@ For codes without a standard reason phrase, the body contains the numeric code:
 999
 ```
 
-Invalid status codes, unparsable `sleep` values, and sleeps above the effective
-`max_sleep` return `400 Bad Request`. A `sleep` accepted by `max_sleep` can
-still exceed the configured HTTP request timeout. When the request context is
-canceled while waiting for an accepted sleep, the service returns
-`408 Request Timeout`. A shorter client-side timeout can still close the request
-before a response is observed.
+Invalid status codes, unparsable `sleep` values, sleeps above the effective
+`max_sleep`, invalid `location` values, and `location` values on non-redirect
+responses return `400 Bad Request`. A `sleep` accepted by `max_sleep` can still
+exceed the configured HTTP request timeout. When the request context is canceled
+while waiting for an accepted sleep, the service returns `408 Request Timeout`.
+A shorter client-side timeout can still close the request before a response is
+observed.
 
 The maximum accepted sleep duration defaults to `5m`. Configure a lower maximum with:
 

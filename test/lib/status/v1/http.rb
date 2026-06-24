@@ -18,6 +18,10 @@ module Status
 
         get(path, opts)
       end
+
+      def code_with_location(code, location, opts = {})
+        get("v1/status/#{code}?location=#{location}", opts.merge(max_redirects: 0))
+      end
     end
   end
 end
