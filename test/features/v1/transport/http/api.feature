@@ -27,6 +27,11 @@ Feature: Server
     Then I should receive a response with 302 and "302 Found"
     And I should receive a location "/redirected"
 
+  Scenario: Set retry after
+    When I request to set the code 503 and retry after "500ms"
+    Then I should receive a response with 503 and "503 Service Unavailable"
+    And I should receive a retry after "1"
+
   Scenario: Reject sleep above maximum
     When I request to set the code 200 and sleep "5m1s"
     Then I should receive a bad request response
@@ -38,6 +43,10 @@ Feature: Server
 
   Scenario: Reject unsafe redirect location
     When I request to set the code 302 and location "/redirected%0Abad"
+    Then I should receive a bad request response
+
+  Scenario: Reject retry after for non-retry status
+    When I request to set the code 200 and retry after "2s"
     Then I should receive a bad request response
 
   Scenario Outline: Set invalid status code
@@ -59,3 +68,13 @@ Feature: Server
     Examples:
       | sleep   |
       | invalid |
+
+  Scenario Outline: Set invalid retry after
+    When I request to set the code 503 and retry after "<retry_after>"
+    Then I should receive a bad request response
+
+    Examples:
+      | retry_after |
+      | invalid     |
+      | 0s          |
+      | -1s         |
