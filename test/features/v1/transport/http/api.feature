@@ -22,10 +22,23 @@ Feature: Server
     Then I should receive a response with 200 and "200 OK"
     And I should receive the response in at least 50 ms
 
+  Scenario: Set redirect location
+    When I request to set the code 302 and location "/redirected"
+    Then I should receive a response with 302 and "302 Found"
+    And I should receive a location "/redirected"
+
   Scenario: Reject sleep above maximum
     When I request to set the code 200 and sleep "5m1s"
     Then I should receive a bad request response
     And I should receive the response in less than 1000 ms
+
+  Scenario: Reject redirect location for non-redirect status
+    When I request to set the code 200 and location "/redirected"
+    Then I should receive a bad request response
+
+  Scenario: Reject unsafe redirect location
+    When I request to set the code 302 and location "/redirected%0Abad"
+    Then I should receive a bad request response
 
   Scenario Outline: Set invalid status code
     When I request to set the invalid code "<code>"

@@ -1,6 +1,7 @@
 package http
 
 import (
+	"net/url"
 	"strconv"
 
 	"github.com/alexfalkowski/go-service/v2/context"
@@ -20,6 +21,9 @@ var ErrInvalidStatusCode = errors.New("status: invalid status code")
 // ErrInvalidSleepDuration is returned when the requested sleep duration is unsupported.
 var ErrInvalidSleepDuration = errors.New("status: invalid sleep duration")
 
+// ErrInvalidLocation is returned when the requested redirect location is unsupported.
+var ErrInvalidLocation = errors.New("status: invalid location")
+
 // Response marks the status route response type for the shared REST transport.
 type Response any
 
@@ -28,10 +32,12 @@ type Response any
 // The route accepts status codes from 200 through 999. The optional sleep query
 // parameter is parsed as a duration, rejected when it exceeds the configured
 // maximum, and returns 408 Request Timeout when the request context is canceled
-// while waiting.
+// while waiting. The optional location query parameter sets a Location response
+// header for 3xx status codes.
 func Register(cfg *config.Config) {
 	rest.Get("/v1/status/{code}", func(ctx context.Context) (*Response, error) {
 		req := meta.Request(ctx)
+		res := meta.Response(ctx)
 
 		code, err := parseStatusCode(req.PathValue("code"))
 		if err != nil {
@@ -57,6 +63,14 @@ func Register(cfg *config.Config) {
 			}
 		}
 
+		if location := req.URL.Query().Get("location"); !strings.IsEmpty(location) {
+			if !isRedirectStatusCode(code) || !isValidLocation(location) {
+				return nil, status.SafeError(http.StatusBadRequest, ErrInvalidLocation)
+			}
+
+			res.Header().Set("Location", location)
+		}
+
 		return nil, status.Errorf(code, "%d %s", code, http.StatusText(code))
 	})
 }
@@ -72,4 +86,17 @@ func parseStatusCode(code string) (int, error) {
 	}
 
 	return codeValue, nil
+}
+
+func isRedirectStatusCode(code int) bool {
+	return code >= http.StatusMultipleChoices && code < http.StatusBadRequest
+}
+
+func isValidLocation(location string) bool {
+	if strings.Contains(location, "\r") || strings.Contains(location, "\n") {
+		return false
+	}
+
+	_, err := url.Parse(location)
+	return err == nil
 }

@@ -14,6 +14,10 @@ When('I request to set the code {int} and sleep {string}') do |code, sleep|
   @elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - start
 end
 
+When('I request to set the code {int} and location {string}') do |code, location|
+  @response = Status::V1.http.code_with_location(code, location, Status::V1.http.options)
+end
+
 When('I request to set the invalid code {string}') do |code|
   @response = Status::V1.http.code(code, '1ms', Status::V1.http.options)
 end
@@ -30,6 +34,10 @@ end
 Then('I should receive a response with {int} and {string}') do |code, body|
   expect(@response.code).to eq(code)
   expect(@response.body.strip).to eq(body)
+end
+
+Then('I should receive a location {string}') do |location|
+  expect(@response.headers[:location]).to eq(location)
 end
 
 Then('I should receive the response in at least {int} ms') do |time|
