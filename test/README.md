@@ -63,7 +63,8 @@ and generated artifacts before assuming a service regression.
 
 Cucumber and Nonnative write artifacts under `test/reports/`:
 
-- `index.html`: HTML Cucumber report.
+- `features.html`: HTML Cucumber report from `make features`.
+- `benchmarks.html`: HTML Cucumber report from `make benchmarks`.
 - `nonnative.log`: Nonnative process orchestration log.
 - `server.log`: service process log.
 - `*.xml`: JUnit-style Cucumber reports.
