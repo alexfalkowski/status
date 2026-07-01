@@ -43,6 +43,14 @@ Feature: Server
     Then I should receive a response with 503 and "503 Service Unavailable"
     And I should receive a retry after "1"
 
+  Scenario: Set extra response headers
+    When I request to set the code 429 and headers
+      | X-Rate-Limit-Remaining | 42  |
+      | X-Rate-Limit-Limit     | 100 |
+    Then I should receive a response with 429 and "429 Too Many Requests"
+    And I should receive a header "X-Rate-Limit-Remaining" "42"
+    And I should receive a header "X-Rate-Limit-Limit" "100"
+
   Scenario: Reject sleep above maximum
     When I request to set the code 200 and sleep "5m1s"
     Then I should receive a bad request response
@@ -59,6 +67,20 @@ Feature: Server
   Scenario: Reject retry after for non-retry status
     When I request to set the code 200 and retry after "2s"
     Then I should receive a bad request response
+
+  Scenario: Reject malformed extra response header
+    When I request to set the code 200 and raw header "X-Trace-Id"
+    Then I should receive a bad request response
+
+  Scenario Outline: Reject invalid extra response header
+    When I request to set the code 200 and header "<header>" "<value>"
+    Then I should receive a bad request response
+
+    Examples:
+      | header       | value      |
+      | Bad Header   | value      |
+      | X-Trace-Id   | abc%0Abad  |
+      | Content-Type | text/plain |
 
   Scenario Outline: Set invalid status code
     When I request to set the invalid code "<code>"
