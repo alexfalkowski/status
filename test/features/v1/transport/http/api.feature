@@ -17,6 +17,17 @@ Feature: Server
     When I request to set the code 200 without sleep
     Then I should receive a response with 200 and "200 OK"
 
+  Scenario Outline: Set valid status code with method
+    When I request to set the code 503 with "<method>"
+    Then I should receive a response with 503 and "503 Service Unavailable"
+
+    Examples:
+      | method |
+      | POST   |
+      | PUT    |
+      | PATCH  |
+      | DELETE |
+
   Scenario: Set valid sleep
     When I request to set the code 200 and sleep "50ms"
     Then I should receive a response with 200 and "200 OK"

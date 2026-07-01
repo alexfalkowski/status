@@ -45,6 +45,7 @@ all interfaces. For local requests, use:
 
 ```sh
 curl -i http://localhost:11000/v1/status/200
+curl -i -X POST http://localhost:11000/v1/status/503
 curl -i "http://localhost:11000/v1/status/503?sleep=50ms"
 curl -i "http://localhost:11000/v1/status/302?location=/redirected"
 curl -i "http://localhost:11000/v1/status/503?retry_after=2s"
@@ -66,14 +67,15 @@ Returns the requested HTTP status code.
 #### 📥 Request
 
 ```http
-GET /v1/status/{code}
-GET /v1/status/{code}?sleep=50ms
-GET /v1/status/{code}?location=/redirected
-GET /v1/status/{code}?retry_after=2s
+GET|POST|PUT|PATCH|DELETE /v1/status/{code}
+GET|POST|PUT|PATCH|DELETE /v1/status/{code}?sleep=50ms
+GET|POST|PUT|PATCH|DELETE /v1/status/{code}?location=/redirected
+GET|POST|PUT|PATCH|DELETE /v1/status/{code}?retry_after=2s
 ```
 
 > [!NOTE]
 > `code` must parse as an integer from `200` through `999`. Values below `200`, values above `999`, and non-numeric values return `400 Bad Request`.
+> `POST`, `PUT`, `PATCH`, and `DELETE` requests ignore request bodies and use the same query-parameter behavior as `GET`.
 
 | Parameter | Location | Required | Description |
 | --------- | -------- | -------- | ----------- |
