@@ -28,6 +28,18 @@ module Status
         status(code, opts, retry_after: retry_after)
       end
 
+      def code_with_header(code, header, value, opts = {})
+        status(code, opts, header: "#{header}:#{value}")
+      end
+
+      def code_with_headers(code, headers, opts = {})
+        status(code, opts, header: headers.map { |header, value| "#{header}:#{value}" })
+      end
+
+      def code_with_raw_header(code, header, opts = {})
+        status(code, opts, header: header)
+      end
+
       private
 
       def status(code, opts, method: 'get', **params)
@@ -38,10 +50,14 @@ module Status
       end
 
       def status_path(code, params)
-        query = params.filter_map { |key, value| "#{key}=#{value}" unless value.to_s.empty? }.join('&')
+        query = params.flat_map { |key, value| query_values(key, value) }.join('&')
         path = "v1/status/#{code}"
 
         query.empty? ? path : "#{path}?#{query}"
+      end
+
+      def query_values(key, value)
+        Array(value).filter_map { |item| "#{key}=#{item}" unless item.to_s.empty? }
       end
 
       def payload_method?(method)

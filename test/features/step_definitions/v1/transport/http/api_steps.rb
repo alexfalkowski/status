@@ -26,6 +26,18 @@ When('I request to set the code {int} and retry after {string}') do |code, retry
   @response = Status::V1.http.code_with_retry_after(code, retry_after, Status::V1.http.options)
 end
 
+When('I request to set the code {int} and header {string} {string}') do |code, header, value|
+  @response = Status::V1.http.code_with_header(code, header, value, Status::V1.http.options)
+end
+
+When('I request to set the code {int} and headers') do |code, headers|
+  @response = Status::V1.http.code_with_headers(code, headers.rows_hash, Status::V1.http.options)
+end
+
+When('I request to set the code {int} and raw header {string}') do |code, header|
+  @response = Status::V1.http.code_with_raw_header(code, header, Status::V1.http.options)
+end
+
 When('I request to set the invalid code {string}') do |code|
   @response = Status::V1.http.code(code, '1ms', Status::V1.http.options)
 end
@@ -50,6 +62,10 @@ end
 
 Then('I should receive a retry after {string}') do |retry_after|
   expect(@response.headers[:retry_after]).to eq(retry_after)
+end
+
+Then('I should receive a header {string} {string}') do |header, value|
+  expect(@response.headers[header.downcase.tr('-', '_').to_sym]).to eq(value)
 end
 
 Then('I should receive the response in at least {int} ms') do |time|

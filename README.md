@@ -49,6 +49,7 @@ curl -i -X POST http://localhost:11000/v1/status/503
 curl -i "http://localhost:11000/v1/status/503?sleep=50ms"
 curl -i "http://localhost:11000/v1/status/302?location=/redirected"
 curl -i "http://localhost:11000/v1/status/503?retry_after=2s"
+curl -i "http://localhost:11000/v1/status/429?header=X-Rate-Limit-Remaining:42"
 curl -i http://localhost:11000/status/livez
 ```
 
@@ -71,6 +72,7 @@ GET|POST|PUT|PATCH|DELETE /v1/status/{code}
 GET|POST|PUT|PATCH|DELETE /v1/status/{code}?sleep=50ms
 GET|POST|PUT|PATCH|DELETE /v1/status/{code}?location=/redirected
 GET|POST|PUT|PATCH|DELETE /v1/status/{code}?retry_after=2s
+GET|POST|PUT|PATCH|DELETE /v1/status/{code}?header=X-Rate-Limit-Remaining:42
 ```
 
 > [!NOTE]
@@ -83,6 +85,7 @@ GET|POST|PUT|PATCH|DELETE /v1/status/{code}?retry_after=2s
 | `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. Must be less than or equal to the effective `max_sleep` and short enough for the configured HTTP request timeout. Parsed durations at or below `0` are accepted and return without waiting. |
 | `location` | Query | No | Redirect target to return in the `Location` header. Only valid for `300` through `399` responses. URL-encode values that contain query delimiters or other reserved characters. Decoded carriage-return and newline characters are rejected. |
 | `retry_after` | Query | No | Delay to return in the `Retry-After` header. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), rounded up to whole seconds, and only valid for `300` through `399`, `429`, and `503` responses. Values must be greater than `0`. |
+| `header` | Query | No | Extra response header in `Name:Value` form. May be repeated. Header names must use HTTP token characters, decoded values must not contain carriage-return or newline characters, and `Content-Length`, `Content-Type`, `Location`, and `Retry-After` are reserved. URL-encode values that contain query delimiters or other reserved characters. |
 
 > [!CAUTION]
 > `sleep` intentionally delays the response. Keep durations short in tests so client timeouts and CI jobs do not wait longer than expected. The checked-in local configuration sets `max_sleep` to `2m` and the HTTP timeout to `5s`, so some accepted sleeps can still outlast the transport timeout.

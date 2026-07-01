@@ -7,6 +7,7 @@ import (
 
 	"github.com/alexfalkowski/go-service/v2/context"
 	"github.com/alexfalkowski/go-service/v2/errors"
+	"github.com/alexfalkowski/go-service/v2/net/header"
 	"github.com/alexfalkowski/go-service/v2/net/http"
 	"github.com/alexfalkowski/go-service/v2/net/http/meta"
 	"github.com/alexfalkowski/go-service/v2/net/http/rest"
@@ -28,6 +29,9 @@ var ErrInvalidLocation = errors.New("status: invalid location")
 // ErrInvalidRetryAfter is returned when the requested retry after duration is unsupported.
 var ErrInvalidRetryAfter = errors.New("status: invalid retry after")
 
+// ErrInvalidHeader is returned when a requested response header is unsupported.
+var ErrInvalidHeader = errors.New("status: invalid header")
+
 // Response marks the status route response type for the shared REST transport.
 type Response any
 
@@ -39,7 +43,8 @@ type Response any
 // is canceled while waiting. The optional location query parameter sets a
 // Location response header for 3xx status codes. The optional retry_after query
 // parameter sets a Retry-After response header for 3xx, 429, and 503 status
-// codes.
+// codes. Repeated header query parameters set additional validated response
+// headers in Name:Value form.
 func Register(cfg *config.Config) {
 	for _, method := range []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodPatch, http.MethodDelete} {
 		rest.Route(strings.Join(strings.Space, method, "/v1/status/{code}"), statusHandler(cfg))
@@ -50,21 +55,26 @@ func statusHandler(cfg *config.Config) func(context.Context) (*Response, error) 
 	return func(ctx context.Context) (*Response, error) {
 		req := meta.Request(ctx)
 		res := meta.Response(ctx)
+		query := req.URL.Query()
 
 		code, err := parseStatusCode(req.PathValue("code"))
 		if err != nil {
 			return nil, status.SafeError(http.StatusBadRequest, err)
 		}
 
-		if err := waitForSleep(ctx, cfg, req.URL.Query().Get("sleep")); err != nil {
+		if err := waitForSleep(ctx, cfg, query.Get("sleep")); err != nil {
 			return nil, err
 		}
 
-		if err := setLocationHeader(res, code, req.URL.Query().Get("location")); err != nil {
+		if err := setLocationHeader(res, code, query.Get("location")); err != nil {
 			return nil, err
 		}
 
-		if err := setRetryAfterHeader(res, code, req.URL.Query().Get("retry_after")); err != nil {
+		if err := setRetryAfterHeader(res, code, query.Get("retry_after")); err != nil {
+			return nil, err
+		}
+
+		if err := setExtraHeaders(res, query["header"]); err != nil {
 			return nil, err
 		}
 
@@ -144,6 +154,33 @@ func setRetryAfterHeader(res http.ResponseWriter, code int, retryAfterValue stri
 	return nil
 }
 
+func setExtraHeaders(res http.ResponseWriter, headers []string) error {
+	for _, field := range headers {
+		name, value, ok := strings.CutColon(field)
+		if !ok {
+			return status.SafeError(http.StatusBadRequest, ErrInvalidHeader)
+		}
+		if !isValidExtraHeader(name, value) {
+			return status.SafeError(http.StatusBadRequest, ErrInvalidHeader)
+		}
+
+		res.Header().Set(name, value)
+	}
+
+	return nil
+}
+
+func isValidExtraHeader(name, value string) bool {
+	if !header.ValidFieldName(name) {
+		return false
+	}
+	if isReservedHeaderName(name) {
+		return false
+	}
+
+	return header.ValidFieldValue(value)
+}
+
 func isRedirectStatusCode(code int) bool {
 	return code >= http.StatusMultipleChoices && code < http.StatusBadRequest
 }
@@ -161,4 +198,13 @@ func isValidLocation(location string) bool {
 
 	_, err := url.Parse(location)
 	return err == nil
+}
+
+func isReservedHeaderName(name string) bool {
+	switch strings.ToLower(name) {
+	case "content-length", "content-type", "location", "retry-after":
+		return true
+	default:
+		return false
+	}
 }
