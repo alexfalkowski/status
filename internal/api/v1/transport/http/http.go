@@ -31,16 +31,23 @@ var ErrInvalidRetryAfter = errors.New("status: invalid retry after")
 // Response marks the status route response type for the shared REST transport.
 type Response any
 
-// Register adds GET /v1/status/{code} to the shared REST router.
+// Register adds /v1/status/{code} routes to the shared REST router.
 //
-// The route accepts status codes from 200 through 999. The optional sleep query
-// parameter is parsed as a duration, rejected when it exceeds the configured
-// maximum, and returns 408 Request Timeout when the request context is canceled
-// while waiting. The optional location query parameter sets a Location response
-// header for 3xx status codes. The optional retry_after query parameter sets a
-// Retry-After response header for 3xx, 429, and 503 status codes.
+// The routes accept status codes from 200 through 999. The optional sleep
+// query parameter is parsed as a duration, rejected when it exceeds the
+// configured maximum, and returns 408 Request Timeout when the request context
+// is canceled while waiting. The optional location query parameter sets a
+// Location response header for 3xx status codes. The optional retry_after query
+// parameter sets a Retry-After response header for 3xx, 429, and 503 status
+// codes.
 func Register(cfg *config.Config) {
-	rest.Get("/v1/status/{code}", func(ctx context.Context) (*Response, error) {
+	for _, method := range []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodPatch, http.MethodDelete} {
+		rest.Route(strings.Join(strings.Space, method, "/v1/status/{code}"), statusHandler(cfg))
+	}
+}
+
+func statusHandler(cfg *config.Config) func(context.Context) (*Response, error) {
+	return func(ctx context.Context) (*Response, error) {
 		req := meta.Request(ctx)
 		res := meta.Response(ctx)
 
@@ -62,7 +69,7 @@ func Register(cfg *config.Config) {
 		}
 
 		return nil, status.Errorf(code, "%d %s", code, http.StatusText(code))
-	})
+	}
 }
 
 func parseStatusCode(code string) (int, error) {
