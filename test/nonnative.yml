@@ -16,5 +16,6 @@ processes:
       - 11000
     log: reports/server.log
     readiness:
-      port: 11000
-      path: /status/readyz
+      - kind: http
+        port: 11000
+        path: /status/readyz
