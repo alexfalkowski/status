@@ -33,6 +33,12 @@ make dep
 The configured `bin` submodule URL uses GitHub SSH. Configure GitHub SSH access
 first, or override the submodule URL to HTTPS before initializing it.
 
+To use HTTPS without changing `.gitmodules`, initialize the submodule with:
+
+```sh
+git -c submodule.bin.url=https://github.com/alexfalkowski/bin.git submodule update --init
+```
+
 Build and run the service with the local test configuration:
 
 ```sh
@@ -72,7 +78,7 @@ GET|POST|PUT|PATCH|DELETE /v1/status/{code}
 GET|POST|PUT|PATCH|DELETE /v1/status/{code}?sleep=50ms
 GET|POST|PUT|PATCH|DELETE /v1/status/{code}?location=/redirected
 GET|POST|PUT|PATCH|DELETE /v1/status/{code}?retry_after=2s
-GET|POST|PUT|PATCH|DELETE /v1/status/{code}?header=X-Rate-Limit-Remaining:42
+GET|POST|PUT|PATCH|DELETE /v1/status/{code}?header=X-Rate-Limit-Remaining:42&header=X-Rate-Limit-Limit:100
 ```
 
 > [!NOTE]
@@ -82,10 +88,10 @@ GET|POST|PUT|PATCH|DELETE /v1/status/{code}?header=X-Rate-Limit-Remaining:42
 | Parameter | Location | Required | Description |
 | --------- | -------- | -------- | ----------- |
 | `code` | Path | Yes | Status code to return. Named codes include their standard reason phrase, such as `200 OK`. |
-| `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. Must be less than or equal to the effective `max_sleep` and short enough for the configured HTTP request timeout. Parsed durations at or below `0` are accepted and return without waiting. |
+| `sleep` | Query | No | Delay before returning the response. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), for example `50ms`, `1s`, or `2m`. Must be less than or equal to the effective `max_sleep`; values longer than the configured HTTP request timeout are still accepted. Parsed durations at or below `0` are accepted and return without waiting. |
 | `location` | Query | No | Redirect target to return in the `Location` header. Only valid for `300` through `399` responses. URL-encode values that contain query delimiters or other reserved characters. Decoded carriage-return and newline characters are rejected. |
 | `retry_after` | Query | No | Delay to return in the `Retry-After` header. Parsed with Go's [`time.ParseDuration`](https://pkg.go.dev/time#ParseDuration), rounded up to whole seconds, and only valid for `300` through `399`, `429`, and `503` responses. Values must be greater than `0`. |
-| `header` | Query | No | Extra response header in `Name:Value` form. May be repeated. Header names must use HTTP token characters, decoded values must not contain carriage-return or newline characters, and `Content-Length`, `Content-Type`, `Location`, and `Retry-After` are reserved. URL-encode values that contain query delimiters or other reserved characters. |
+| `header` | Query | No | Extra response header in `Name:Value` form. May be repeated to set different fields; when a field name repeats case-insensitively, the last value wins. Header names must use HTTP token characters, decoded values must not contain carriage-return or newline characters, and `Content-Length`, `Content-Type`, `Location`, and `Retry-After` are reserved. URL-encode values that contain query delimiters or other reserved characters. |
 
 > [!CAUTION]
 > `sleep` intentionally delays the response. Keep durations short in tests so client timeouts and CI jobs do not wait longer than expected. The checked-in local configuration sets `max_sleep` to `2m` and the HTTP timeout to `5s`, so some accepted sleeps can still outlast the transport timeout.
@@ -112,7 +118,8 @@ Invalid status codes, unparsable `sleep` values, sleeps above the effective
 `max_sleep`, invalid `location` values including decoded carriage-return or
 newline characters, `location` values on non-redirect responses, invalid
 `retry_after` values, and `retry_after` values on unsupported responses return
-`400 Bad Request`. A `sleep` accepted by `max_sleep` can still
+`400 Bad Request`. `header` values that are malformed, invalid, or reserved also
+return `400 Bad Request`. A `sleep` accepted by `max_sleep` can still
 exceed the configured HTTP request timeout. When the request context is canceled
 while waiting for an accepted sleep, the service returns `408 Request Timeout`.
 A shorter client-side timeout can still close the request before a response is
@@ -152,7 +159,9 @@ health:
   timeout: 1s
 ```
 
-The `health` block is required. Both durations must be positive values.
+The `health` block is required. `duration` is the interval between check
+executions, while `timeout` is the maximum duration of one check. Both values
+must be positive.
 
 The repository's local configuration is in `test/.config/server.yml`.
 
@@ -164,6 +173,20 @@ platform-specific images for `amd64` and `arm64`; production push and manifest
 targets no-op unless the release version file is present. In production-like
 environments, run the image behind your normal container orchestration and
 health-check configuration.
+
+From the repository root, run the published image with the checked-in local
+configuration:
+
+```sh
+docker run --rm \
+  --publish 127.0.0.1:11000:11000 \
+  --volume "$PWD/test/.config/server.yml:/config.yml:ro" \
+  alexfalkowski/status:latest \
+  server -config file:/config.yml
+```
+
+Use `latest` for local exploration. Pin a released version tag for repeatable
+automated tests.
 
 ## 🛠️ Development
 

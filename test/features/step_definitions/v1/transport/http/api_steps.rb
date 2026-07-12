@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-When('I request to set the code {int}') do |code|
+When('I request to set the code {int} with a 1ms sleep') do |code|
   @response = Status::V1.http.code(code, '1ms', Status::V1.http.options)
 end
 
@@ -38,7 +38,7 @@ When('I request to set the code {int} and raw header {string}') do |code, header
   @response = Status::V1.http.code_with_raw_header(code, header, Status::V1.http.options)
 end
 
-When('I request to set the invalid code {string}') do |code|
+When('I request to set the invalid code {string} with a 1ms sleep') do |code|
   @response = Status::V1.http.code(code, '1ms', Status::V1.http.options)
 end
 

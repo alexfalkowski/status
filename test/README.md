@@ -20,6 +20,10 @@ builds the feature test binary and runs non-benchmark Cucumber scenarios.
 `make benchmarks` builds the release binary and runs scenarios tagged
 `@benchmark`.
 
+`make features` exercises the Internet-backed `/status/healthz` check. In an
+offline or restricted environment, that scenario can fail even when the local
+no-op liveness and readiness checks are healthy.
+
 Direct harness runs are supported only after the matching root build has
 created `./status`:
 
