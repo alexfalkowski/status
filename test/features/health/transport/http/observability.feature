@@ -1,6 +1,7 @@
 Feature: Observability
 
-  Observability is a measure of how well internal states of a system can be inferred by knowledge of its external outputs.
+  Health checks external connectivity, liveness and readiness use local no-op checks,
+  and metrics expose Prometheus data.
 
   Scenario: Health
     When the system requests the "health"

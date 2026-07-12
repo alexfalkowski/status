@@ -3,7 +3,7 @@ Feature: Server
   Server allows users to get different status codes.
 
   Scenario Outline: Set valid status code
-    When I request to set the code <code>
+    When I request to set the code <code> with a 1ms sleep
     Then I should receive a response with <code> and "<body>"
 
     Examples:
@@ -83,7 +83,7 @@ Feature: Server
       | Content-Type | text/plain |
 
   Scenario Outline: Set invalid status code
-    When I request to set the invalid code "<code>"
+    When I request to set the invalid code "<code>" with a 1ms sleep
     Then I should receive a bad request response
 
     Examples:
