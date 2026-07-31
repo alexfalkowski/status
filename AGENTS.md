@@ -24,7 +24,7 @@ testing.
   `/v1/status/{code}`.
 - `internal/health/`: health registration and HTTP observers.
 - `test/`: Ruby nonnative/cucumber integration and benchmark harness.
-- `test/.config/server.yml`: local config used by `dev`, `features`, and
+- `test/.config/server.yaml`: local config used by `dev`, `features`, and
   `benchmarks`.
 - `bin/build/make/*.mak`: shared Makefile fragments used by the root
   `Makefile`.
@@ -53,7 +53,7 @@ surface.
 - `go.mod` owns the current Go toolchain declaration.
 - Ruby test harness dependencies live in `test/Gemfile`.
 - `test/nonnative.yml` expects the service on `http://localhost:11000`.
-- `test/.config/server.yml` listens on `tcp://:11000`, which binds port `11000`
+- `test/.config/server.yaml` listens on `tcp://:11000`, which binds port `11000`
   on all interfaces; use `http://localhost:11000` for local client requests.
   Operation endpoints use the `status` service prefix, for example
   `http://localhost:11000/status/healthz`.

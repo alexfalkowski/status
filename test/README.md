@@ -40,7 +40,7 @@ make -C test benchmarks
 Nonnative starts the service from `test/nonnative.yml` with:
 
 ```sh
-../status server -config file:.config/server.yml
+../status server -config file:.config/server.yaml
 ```
 
 Run direct harness commands through `make -C test` from the repository root, or
@@ -48,7 +48,7 @@ change into `test/` and run the same target there. The Nonnative config uses
 paths relative to `test/`. The service listens on `http://localhost:11000`, and
 port `11000` must be free before the harness starts.
 
-The local server config is `test/.config/server.yml`. It enables Prometheus
+The local server config is `test/.config/server.yaml`. It enables Prometheus
 metrics, sets `max_sleep: 2m`, and configures the HTTP transport timeout to
 `5s`.
 

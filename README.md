@@ -43,7 +43,7 @@ Build and run the service with the local test configuration:
 
 ```sh
 make build
-./status server -config file:test/.config/server.yml
+./status server -config file:test/.config/server.yaml
 ```
 
 The local configuration listens on `tcp://:11000`, which binds port `11000` on
@@ -63,7 +63,7 @@ curl -i http://localhost:11000/status/livez
 > The root `Makefile` includes files from the `bin` submodule. Run `git submodule update --init` before using `make` in a fresh checkout.
 
 > [!TIP]
-> If you have `air` installed, `make dev` builds and runs the server in watch mode with `test/.config/server.yml`.
+> If you have `air` installed, `make dev` builds and runs the server in watch mode with `test/.config/server.yaml`.
 
 ## 🖥️ Server
 
@@ -163,7 +163,7 @@ The `health` block is required. `duration` is the interval between check
 executions, while `timeout` is the maximum duration of one check. Both values
 must be positive.
 
-The repository's local configuration is in `test/.config/server.yml`.
+The repository's local configuration is in `test/.config/server.yaml`.
 
 ## 🚢 Deployment
 
@@ -180,7 +180,7 @@ configuration:
 ```sh
 docker run --rm \
   --publish 127.0.0.1:11000:11000 \
-  --volume "$PWD/test/.config/server.yml:/config.yml:ro" \
+  --volume "$PWD/test/.config/server.yaml:/config.yml:ro" \
   alexfalkowski/status:latest \
   server -config file:/config.yml
 ```
