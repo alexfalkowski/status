@@ -45,9 +45,9 @@ type Response any
 // parameter sets a Retry-After response header for 3xx, 429, and 503 status
 // codes. Repeated header query parameters set additional validated response
 // headers in Name:Value form.
-func Register(cfg *config.Config) {
+func Register(server *rest.Server, cfg *config.Config) {
 	for _, method := range []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodPatch, http.MethodDelete} {
-		rest.Route(strings.Join(strings.Space, method, "/v1/status/{code}"), statusHandler(cfg))
+		server.Route(strings.Join(strings.Space, method, "/v1/status/{code}"), statusHandler(cfg))
 	}
 }
 
