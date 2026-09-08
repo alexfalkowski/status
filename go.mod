@@ -4,7 +4,7 @@ go 1.27.0
 
 require (
 	github.com/alexfalkowski/go-health/v2 v2.39.0
-	github.com/alexfalkowski/go-service/v2 v2.775.0
+	github.com/alexfalkowski/go-service/v2 v2.776.0
 )
 
 require (
@@ -53,7 +53,7 @@ require (
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
-	github.com/jackc/pgx/v5 v5.10.0 // indirect
+	github.com/jackc/pgx/v5 v5.11.0 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/jellydator/ttlcache/v3 v3.4.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
@@ -129,7 +129,7 @@ require (
 	golang.org/x/sys v0.47.0 // indirect
 	golang.org/x/text v0.41.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20260831171406-18b4a7587f8a // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260831171406-18b4a7587f8a // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260904194346-d0f1323225a4 // indirect
 	google.golang.org/grpc v1.83.2 // indirect
 	google.golang.org/protobuf v1.36.12 // indirect
 )
