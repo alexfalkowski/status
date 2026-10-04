@@ -6,6 +6,7 @@ linters:
     - depguard
     - embeddedstructfieldcheck
     - exhaustruct
+    - exhaustruct_v5
     - funcorder
     - ireturn
     - nlreturn
