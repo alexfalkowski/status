@@ -7,7 +7,7 @@ import (
 
 // Module registers service config loading, validation, and shared config projection.
 var Module = di.Module(
-	di.Decorate(decorateValidator),
+	di.Constructor(newValidation),
 	di.Constructor(config.NewConfig[Config]),
 	di.Decorate(decorateConfig),
 	di.Constructor(healthConfig),

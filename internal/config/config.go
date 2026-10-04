@@ -3,7 +3,6 @@ package config
 import (
 	"github.com/alexfalkowski/go-service/v2/config"
 	"github.com/alexfalkowski/go-service/v2/config/validate"
-	"github.com/alexfalkowski/go-service/v2/runtime"
 	"github.com/alexfalkowski/go-service/v2/time"
 	"github.com/alexfalkowski/status/internal/health"
 )
@@ -39,9 +38,8 @@ func healthConfig(cfg *Config) *health.Config {
 	return cfg.Health
 }
 
-func decorateValidator(v *validate.Validator) *validate.Validator {
-	runtime.Must(v.RegisterValidation("max_sleep", validateMaxSleep))
-	return v
+func newValidation() validate.ValidationResult {
+	return validate.ValidationResult{Validation: validate.Validation{Tag: "max_sleep", Func: validateMaxSleep}}
 }
 
 func validateMaxSleep(fl validate.FieldLevel) bool {
