@@ -1,7 +1,6 @@
 [![CircleCI](https://circleci.com/gh/alexfalkowski/status.svg?style=svg)](https://circleci.com/gh/alexfalkowski/status)
 [![codecov](https://codecov.io/gh/alexfalkowski/status/graph/badge.svg?token=G6T3OIWUFK)](https://codecov.io/gh/alexfalkowski/status)
-[![Go Report Card](https://goreportcard.com/badge/github.com/alexfalkowski/status)](https://goreportcard.com/report/github.com/alexfalkowski/status)
-[![Go Reference](https://pkg.go.dev/badge/github.com/alexfalkowski/status.svg)](https://pkg.go.dev/github.com/alexfalkowski/status)
+[![Go Reference](https://pkg.go.dev/badge/github.com/alexfalkowski/status/v2.svg)](https://pkg.go.dev/github.com/alexfalkowski/status/v2)
 [![Stability: Active](https://masterminds.github.io/stability/active.svg)](https://masterminds.github.io/stability/active.html)
 
 # 🩺 Status
@@ -9,6 +8,10 @@
 `status` is a small Go service for testing HTTP status-code handling and health endpoints.
 It is intended as a local, controllable alternative to depending on <https://httpstat.us/>
 from automated tests.
+
+The Go module path is `github.com/alexfalkowski/status/v2`. Update Go module
+references to include `/v2` when migrating from v1. HTTP endpoints remain under
+`/v1/status/{code}`.
 
 > [!NOTE]
 > This service is built for test fixtures, smoke tests, and client behavior checks. It is not a general-purpose public status-code proxy.

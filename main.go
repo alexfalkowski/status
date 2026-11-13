@@ -4,7 +4,7 @@ import (
 	"github.com/alexfalkowski/go-service/v3/cli"
 	"github.com/alexfalkowski/go-service/v3/context"
 	"github.com/alexfalkowski/go-service/v3/os"
-	"github.com/alexfalkowski/status/internal/cmd"
+	"github.com/alexfalkowski/status/v2/internal/cmd"
 )
 
 var app = cli.NewApplication(func(command cli.Commander) {

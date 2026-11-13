@@ -4,7 +4,7 @@ import (
 	"github.com/alexfalkowski/go-service/v3/config"
 	"github.com/alexfalkowski/go-service/v3/config/validate"
 	"github.com/alexfalkowski/go-service/v3/time"
-	"github.com/alexfalkowski/status/internal/health"
+	"github.com/alexfalkowski/status/v2/internal/health"
 )
 
 // MaxSleepLimit is the largest configured status response delay.

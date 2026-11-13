@@ -1,4 +1,4 @@
-module github.com/alexfalkowski/status
+module github.com/alexfalkowski/status/v2
 
 go 1.27.0
 
