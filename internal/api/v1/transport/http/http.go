@@ -14,7 +14,7 @@ import (
 	"github.com/alexfalkowski/go-service/v3/net/http/status"
 	"github.com/alexfalkowski/go-service/v3/strings"
 	"github.com/alexfalkowski/go-service/v3/time"
-	"github.com/alexfalkowski/status/internal/config"
+	"github.com/alexfalkowski/status/v2/internal/config"
 )
 
 // ErrInvalidStatusCode is returned when the requested status code is unsupported.
