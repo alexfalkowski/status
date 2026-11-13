@@ -19,7 +19,7 @@ testing.
 - `main.go`: CLI bootstrap.
 - `internal/cmd/`: server command registration and module wiring.
 - `internal/config/`: application config layered on top of
-  `github.com/alexfalkowski/go-service/v2/config`.
+  `github.com/alexfalkowski/go-service/v3/config`.
 - `internal/api/v1/transport/http/`: HTTP route registration for
   `/v1/status/{code}`.
 - `internal/health/`: health registration and HTTP observers.

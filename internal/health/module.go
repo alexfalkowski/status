@@ -1,11 +1,11 @@
 package health
 
-import "github.com/alexfalkowski/go-service/v2/di"
+import "github.com/alexfalkowski/go-signal/v2"
 
 // Module registers health checks and HTTP observers for health, liveness, and readiness.
-var Module = di.Module(
-	di.Register(register),
-	di.Register(httpHealthObserver),
-	di.Register(httpLivenessObserver),
-	di.Register(httpReadinessObserver),
+var Module = signal.Module(
+	signal.Register(register),
+	signal.Register(httpHealthObserver),
+	signal.Register(httpLivenessObserver),
+	signal.Register(httpReadinessObserver),
 )

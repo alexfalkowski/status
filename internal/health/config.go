@@ -1,6 +1,6 @@
 package health
 
-import "github.com/alexfalkowski/go-service/v2/time"
+import "github.com/alexfalkowski/go-service/v3/time"
 
 // Config configures the health subsystem.
 //

@@ -3,8 +3,8 @@ package health
 import (
 	"github.com/alexfalkowski/go-health/v2/checker"
 	"github.com/alexfalkowski/go-health/v2/server"
-	"github.com/alexfalkowski/go-service/v2/env"
-	"github.com/alexfalkowski/go-service/v2/health"
+	"github.com/alexfalkowski/go-service/v3/env"
+	"github.com/alexfalkowski/go-service/v3/health"
 )
 
 func register(name env.Name, srv *server.Server, cfg *Config) {

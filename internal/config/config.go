@@ -1,9 +1,9 @@
 package config
 
 import (
-	"github.com/alexfalkowski/go-service/v2/config"
-	"github.com/alexfalkowski/go-service/v2/config/validate"
-	"github.com/alexfalkowski/go-service/v2/time"
+	"github.com/alexfalkowski/go-service/v3/config"
+	"github.com/alexfalkowski/go-service/v3/config/validate"
+	"github.com/alexfalkowski/go-service/v3/time"
 	"github.com/alexfalkowski/status/internal/health"
 )
 
