@@ -4,7 +4,7 @@ go 1.27.0
 
 require (
 	github.com/alexfalkowski/go-health/v2 v2.43.0
-	github.com/alexfalkowski/go-service/v3 v3.0.0
+	github.com/alexfalkowski/go-service/v3 v3.2.0
 	github.com/alexfalkowski/go-signal/v2 v2.0.0
 )
 
@@ -14,7 +14,7 @@ require (
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/Basekick-Labs/msgpack/v6 v6.1.0 // indirect
 	github.com/BurntSushi/toml v1.6.0 // indirect
-	github.com/KimMachineGun/automemlimit v1.0.1 // indirect
+	github.com/KimMachineGun/automemlimit v1.0.2 // indirect
 	github.com/XSAM/otelsql v0.44.0 // indirect
 	github.com/aead/cmac v0.0.0-20160719120800-7af84192f0b1 // indirect
 	github.com/alexfalkowski/go-sync v1.39.0 // indirect
@@ -54,7 +54,7 @@ require (
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
-	github.com/jackc/pgx/v5 v5.12.0 // indirect
+	github.com/jackc/pgx/v5 v5.13.0 // indirect
 	github.com/jackc/puddle/v2 v2.2.3 // indirect
 	github.com/jellydator/ttlcache/v3 v3.4.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
