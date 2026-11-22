@@ -11,6 +11,9 @@ telemetry:
     level: info
   metrics:
     kind: prometheus
+  tracer:
+    kind: otlp
+    endpoint: http://localhost:4318/v1/traces
 transport:
   http:
     address: tcp://:11000
