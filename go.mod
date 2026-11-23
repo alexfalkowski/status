@@ -4,7 +4,7 @@ go 1.27.0
 
 require (
 	github.com/alexfalkowski/go-health/v2 v2.44.0
-	github.com/alexfalkowski/go-service/v3 v3.13.0
+	github.com/alexfalkowski/go-service/v3 v3.14.0
 	github.com/alexfalkowski/go-signal/v2 v2.1.0
 )
 
