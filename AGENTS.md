@@ -4,6 +4,13 @@
 
 Use `bin/AGENTS.md` for shared skills and cross-repository defaults.
 
+## Accepted design
+
+Read the [accepted-design index](docs/agents/accepted-design.md) and the relevant
+area files before proposing a change or recording a finding or audit entry.
+Apply each decision within its documented scope and record new owner-accepted
+decisions in the relevant area file.
+
 ## Repository purpose
 
 `status` is a small Go service used for HTTP status-code and health endpoint
@@ -58,24 +65,6 @@ surface.
   Operation endpoints use the `status` service prefix, for example
   `http://localhost:11000/status/healthz`.
 - Test and coverage artifacts are written under `test/reports/`.
-- The `/v1/status/{code}` handler also accepts `sleep=<duration>`, parses it
-  with `time.ParseDuration`, and rejects values above the effective `max_sleep`.
-  Longer sleeps can still exceed the configured HTTP request timeout.
-
-## Intentional design choices
-
-- This service intentionally simulates HTTP errors and response delays for tests.
-  The `/v1/status/{code}?sleep=<duration>` path may accept sleeps longer than
-  the configured HTTP request timeout when the value is within `max_sleep`. Do
-  not flag that mismatch as a reliability gap by default; it is expected
-  test-fixture behavior unless the task is specifically about changing delay
-  semantics or there is concrete evidence of current workflow breakage.
-- Docker images for this service are released and deployed frequently, so a
-  separate repository-local container runtime smoke gate before Docker image
-  publication is not required by default. Do not flag the absence of a
-  pre-publish container health smoke check as a reliability or project gap
-  unless there is concrete evidence of current release breakage, or this
-  repository has explicitly decided to own that gate locally.
 
 ## CI signal
 
