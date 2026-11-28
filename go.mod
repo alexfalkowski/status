@@ -4,7 +4,7 @@ go 1.27.0
 
 require (
 	github.com/alexfalkowski/go-health/v2 v2.45.0
-	github.com/alexfalkowski/go-service/v3 v3.20.0
+	github.com/alexfalkowski/go-service/v3 v3.22.0
 	github.com/alexfalkowski/go-signal/v2 v2.1.0
 )
 
@@ -78,9 +78,9 @@ require (
 	github.com/prometheus/common v0.74.0 // indirect
 	github.com/prometheus/otlptranslator v1.0.0 // indirect
 	github.com/prometheus/procfs v0.23.0 // indirect
-	github.com/redis/go-redis/extra/rediscmd/v9 v9.24.0 // indirect
-	github.com/redis/go-redis/extra/redisotel/v9 v9.24.0 // indirect
-	github.com/redis/go-redis/v9 v9.24.0 // indirect
+	github.com/redis/go-redis/extra/rediscmd/v9 v9.24.1 // indirect
+	github.com/redis/go-redis/extra/redisotel/v9 v9.24.1 // indirect
+	github.com/redis/go-redis/v9 v9.24.1 // indirect
 	github.com/rs/xid v1.6.0 // indirect
 	github.com/secure-io/siv-go v0.0.0-20180922214919-5ff40651e2c4 // indirect
 	github.com/segmentio/ksuid v1.0.4 // indirect
